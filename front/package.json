@@ -1,0 +1,15 @@
+{
+  "dependencies": {
+    "next": "^9.5.5"
+  },
+  "name": "bear_and_peach",
+  "version": "1.0.0",
+  "main": "index.js",
+  "devDependencies": {},
+  "scripts": {
+    "dev": "next"
+  },
+  "author": "jakdu",
+  "license": "ISC",
+  "description": ""
+}
