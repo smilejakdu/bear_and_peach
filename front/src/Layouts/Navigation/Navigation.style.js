@@ -18,15 +18,9 @@ const CategoryLink = styled.div`
   background-color: white;
   border-bottom: 2px solid ${palette.base_clor[2]};
   overflow-x: hidden;
-  padding-top: 40px;
 
   a:hover {
     text-decoration: none;
-  }
-  .logout {
-    position: absolute;
-    margin-right: 10px;
-    right: 0;
   }
 `;
 

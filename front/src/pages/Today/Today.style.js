@@ -3,14 +3,13 @@ import palette from "../../utils/palette"
 
 
 const Body = styled.div`
-  margin-top: 10rem;
+  margin-top:10px;
   border : 1px solid red;
   font-size: 28px;
   width: 100%;
 `;
 
-const BodyBorder = styled.div`
-  margin-top: 10rem;
+const BodyCenter = styled.div`
   margin:0 auto;
   border : 1px solid red;
   font-size: 28px;
@@ -21,4 +20,4 @@ const BodyBorder = styled.div`
 
 
 
-export { Body  , BodyBorder };
+export { Body, BodyCenter };

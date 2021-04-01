@@ -1,16 +1,16 @@
 import React from 'react'
 import TodayBody from '../../components/TodayBody/TodayBody';
-import { Body, BodyBorder } from "./Today.style";
+import { Body, BodyCenter } from "./Today.style";
 
 
 const Today=()=> {
     return (
-        <Body>
-            <BodyBorder>
-                <TodayBody></TodayBody>
-            </BodyBorder>
-        </Body>
-    )
+      <Body>
+        <BodyCenter>
+          <TodayBody></TodayBody>
+        </BodyCenter>
+      </Body>
+    );
 }
 
 export default Today
