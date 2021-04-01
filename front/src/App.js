@@ -6,7 +6,6 @@ import Products from "./pages/Products/Products";
 import Today from "./pages/Today/Today";
 
 const App = () => {
-
   return (
     <div>
       <Router>
@@ -15,26 +14,22 @@ const App = () => {
             <Route
               exact="exact"
               path={["/", "/today"]}
-              component={Today}
-            />
+              component={Today}/>
             <Route
               exact="exact"
               path="/products"
-              component={Products}
-            />
+              component={Products}/>
             <Route
               exact="exact"
               path="/mypage"
-              component={Mypage}
-            />
+              component={Mypage}/>
             <Route
               render={({ location }) => (
                 <div>
                   <h2>존재하지 않는 페이지 입니다.</h2>
                   <p>{location.pathname}</p>
                 </div>
-              )}
-            />
+              )}/>
           </Switch>
         </Layout>
       </Router>

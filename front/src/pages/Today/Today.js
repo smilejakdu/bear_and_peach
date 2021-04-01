@@ -1,5 +1,5 @@
 import React from 'react'
-import TodayBody from '../../components/TodayBody/TodayBody';
+import UserProfile  from '../../components/UserProfile/UserProfile';
 import { Body, BodyCenter } from "./Today.style";
 
 
@@ -7,7 +7,7 @@ const Today=()=> {
     return (
       <Body>
         <BodyCenter>
-          <TodayBody></TodayBody>
+          <UserProfile></UserProfile>
         </BodyCenter>
       </Body>
     );
