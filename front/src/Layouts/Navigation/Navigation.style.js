@@ -2,23 +2,24 @@ import styled from "styled-components";
 import palette from "../../utils/palette"
 import { NavLink } from "react-router-dom";
 
+const HeaderBody = styled.div`
+  border :  1px solid blue;
+  width:100%;
+`;
+
 const CategoryLink = styled.div`
-  position: relative;
+  border : 1px solid red;
   width: 85%;
   display: flex;
-  top: 0;
-  right: 0;
-  left: 0;
-  margin-left: auto;
-  margin-right: auto;
+  margin:0 auto;
   z-index: 1;
   justify-content: space-between;
-  min-width: 160px;
-  position: fixed;
+  /* position: fixed; 나중에 고정 시켜야 할때는 그럼 무엇으로 고정을 시키나? */
   background-color: white;
-  border-bottom: 1px solid ${palette.base_clor[2]};
+  border-bottom: 2px solid ${palette.base_clor[2]};
   overflow-x: hidden;
   padding-top: 40px;
+
   a:hover {
     text-decoration: none;
   }
@@ -30,6 +31,7 @@ const CategoryLink = styled.div`
 `;
 
 const CategoryLinkItem = styled(NavLink)`
+  border : 1px solid blue;
   padding: 6px 8px 6px 16px;
   margin-right: 3px;
   text-decoration: none;
@@ -48,4 +50,4 @@ const CategoryLinkItem = styled(NavLink)`
   }
 `;
 
-export { CategoryLinkItem, CategoryLink};
+export { CategoryLinkItem, CategoryLink, HeaderBody };

@@ -1,16 +1,15 @@
 import React from "react";
 import { withRouter } from "react-router-dom";
-import { CategoryLinkItem, CategoryLink } from "./Navigation.style";
+import { CategoryLinkItem, CategoryLink, HeaderBody } from "./Navigation.style";
 
 const categories = [
-  {name: "today",text: "Today"},
-  {name: "products",text: "Products"},
-  {name: "mypage",text: "Mypage"}];
+  {name: "today",text: "오늘"},
+  {name: "products",text: "상품"},
+  {name: "mypage",text: "마이페이지"}];
 
 const Navigation = () => {
-  // Header 부분
   return (
-    <div>
+    <HeaderBody>
       <CategoryLink>
         {categories.map((c) => (
           <CategoryLinkItem
@@ -21,7 +20,7 @@ const Navigation = () => {
           </CategoryLinkItem>
         ))}
       </CategoryLink>
-    </div>
+    </HeaderBody>
   );
 };
 
