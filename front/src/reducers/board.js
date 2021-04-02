@@ -1,4 +1,4 @@
-import produce from "../util/produce";
+import produce from "../utils/produce"
 
 export const initialState = {
   mainPosts: [],
@@ -6,13 +6,17 @@ export const initialState = {
   imagePaths: [],
   hasMorePosts: true,
 
+  LOAD_BOARD_REQUEST:false,
+  LOAD_BOARD_DONE:false,
+  LOAD_BOARD_FAILURE : null,
+
   likePostLoading: false,
   likePostDone: false,
   likePostError: null,
   unlikePostLoading: false,
   unlikePostDone: false,
   unlikePostError: null,
-  
+     
   removePostLoading: false,
   removePostDone: false,
   removePostError: null,

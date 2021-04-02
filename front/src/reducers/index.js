@@ -1,6 +1,8 @@
 import { combineReducers } from "redux";
-import search_input from "./search_input";
+import board from "./board";
+import product from "./product";
 
 export default combineReducers({
-  search_input,
+  board,
+  product,
 });
