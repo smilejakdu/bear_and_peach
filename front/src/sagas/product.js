@@ -1,6 +1,5 @@
 import axios from "axios";
 import { all, fork, put, takeLatest, throttle, call, delay } from 'redux-saga/effects';
-
 import { LOAD_PRODUCTS_REQUEST, LOAD_PRODUCTS_SUCCESS, LOAD_PRODUCTS_FAILURE } from '../reducers/product';
 
 function loadProductsAPI(){
@@ -11,11 +10,7 @@ function* loadProducts(action){
   try{
     const result = yield call(loadProductsAPI);
     yield delay(1000);
-    const {
-        data: {product_content}
-    } = result;
-    console.log(product_content);
-    yield delay(1000);
+    const { data :{ product_content }} = result;
     yield put({
       type:LOAD_PRODUCTS_SUCCESS,
       data:product_content,
@@ -30,7 +25,7 @@ function* loadProducts(action){
 }
 
 function* watchLoadProducts (){
-    yield takeLatest(LOAD_PRODUCTS_REQUEST ,loadProducts);
+    yield throttle(5000,LOAD_PRODUCTS_REQUEST ,loadProducts);
 }
 
 export default function* productSaga(){

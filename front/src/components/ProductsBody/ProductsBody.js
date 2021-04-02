@@ -5,22 +5,10 @@ import { ProductImg, ProductsContainer } from "./ProductsBody.style";
 import { LOAD_PRODUCTS_REQUEST } from "../../reducers/product";
 
 const ProductsBody=()=> {
-  // const [productData , setProductData] = useState([]);
   const dispatch = useDispatch();
   const { mainProducts } = useSelector((state) => state.product);
 
-  // useEffect(()=>{
-  //     const apiUrl = 'dummy/product_body.json';
-  //     axios.get(apiUrl)
-  //     .then(({data})=>{
-  //         const { product_content }= data;
-  //         console.log(product_content);
-  //         setProductData(product_content);
-  //     }).catch(error=>console.log(error))
-  // },[])
-
   useEffect(() => {
-    console.log(1);
     dispatch({
       type : LOAD_PRODUCTS_REQUEST,
     });
