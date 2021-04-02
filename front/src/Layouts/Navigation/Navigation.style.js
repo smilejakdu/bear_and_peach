@@ -9,7 +9,7 @@ const HeaderBody = styled.div`
 
 const CategoryLink = styled.div`
   border : 1px solid red;
-  width: 85%;
+  width: 60%;
   display: flex;
   margin:0 auto;
   z-index: 1;
