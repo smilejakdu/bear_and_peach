@@ -3,12 +3,10 @@ import palette from "../../utils/palette"
 import { NavLink } from "react-router-dom";
 
 const HeaderBody = styled.div`
-  border :  1px solid blue;
   width:100%;
 `;
 
 const CategoryLink = styled.div`
-  border : 1px solid red;
   width: 60%;
   display: flex;
   margin:0 auto;
@@ -25,7 +23,6 @@ const CategoryLink = styled.div`
 `;
 
 const CategoryLinkItem = styled(NavLink)`
-  border : 1px solid blue;
   padding: 6px 8px 6px 16px;
   margin-right: 3px;
   text-decoration: none;

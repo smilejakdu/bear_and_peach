@@ -68,6 +68,22 @@ const CommentUser = styled.div`
   .comment_content {
     color: gray;
     font-size: 12px;
+    &:hover{
+      cursor: pointer;
+    }
+  }
+`;
+
+const InputCustom = styled.input`
+  outline:none;
+  border:none;
+  padding:8px;
+  padding-right:50px;
+  background-color:${palette.gray[3]};
+  color:transparent;
+  border-radius:5px 20px 20px 20px;
+  &:hover{
+    cursor: pointer;
   }
 `;
 
@@ -78,4 +94,5 @@ export {
   Content,
   CommentCount,
   CommentUser,
+  InputCustom,
 };

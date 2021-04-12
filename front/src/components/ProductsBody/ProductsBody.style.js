@@ -5,7 +5,6 @@ const ProductsContainer = styled.div`
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   .product_content_body {
-    border: 1px solid blue;
     margin: 10px auto;
     font-size: 12px;
   }
