@@ -6,6 +6,7 @@ var logger = require("morgan");
 var cors = require("cors");
 const swaggerUi = require("swagger-ui-express");
 const swaggerJSDoc = require("swagger-jsdoc");
+const passport = require('passport')
 
 var indexRouter = require("./routes/index");
 var usersRouter = require("./routes/users");
@@ -65,6 +66,7 @@ app.use(cookieParser());
 //http 프로토콜은 통신이 끝나면 상태 정보를 저장하지 않기 때문에, 유저가 다시 접속 시 이전 화면을 보여주는 등 상태에 대한 저장이 필요할 때 사용
 app.use(express.static(path.join(__dirname, "public")));
 //static(전 경로에서 참조할 수 있는) 루트 디렉토리를 설정해 줌
+app.use(passport.initialize())
 
 app.use("/", indexRouter); // 127.0.0.1:3000
 app.use("/user", usersRouter); // 127.0.0.1:3000/user

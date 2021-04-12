@@ -57,3 +57,17 @@ module.exports.getList = async (options) => {
     values: values,
   });
 };
+
+module.exports.getKakaoList = async(options)=>{
+  const { kakao_id } = options;
+  let query = "SELECT * FROM user ";
+  let values = [];
+  if (kakao_id){
+    query += " WHERE kakao_id = ?";
+    values.push(kakao_id);
+  }
+  return await db.query({
+    query: query,
+    values:values
+  })
+}

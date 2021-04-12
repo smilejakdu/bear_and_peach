@@ -64,7 +64,6 @@ router.post("/signin", async function (req, res, next) {
     } else {
       throw { status: 401, errorMessage: "Authentication failed" };
     }
-
     delete newResult.password;
     delete newResult.salt;
     res.json({ result: newResult });
