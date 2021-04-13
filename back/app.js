@@ -6,12 +6,15 @@ var logger = require("morgan");
 var cors = require("cors");
 const swaggerUi = require("swagger-ui-express");
 const swaggerJSDoc = require("swagger-jsdoc");
-const passport = require('passport')
+const passport = require('passport');
+const passportConfig = require('./passport');
+passportConfig(passport);
 
 var indexRouter = require("./routes/index");
 var usersRouter = require("./routes/users");
 var delivInfoRouter = require("./routes/deliv_info");
-var authRouter = require("./routes/auth");
+var boardRouter = require("./routes/board");
+var boardImgRouter = require("./routes/board_img");
 var app = express();
 
 const swaggerDefinition = {
@@ -45,7 +48,6 @@ app.get("/swagger.json", (req, res) => {
 
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
-
 app.use(cors());
 // view engine setup
 app.set("views", path.join(__dirname, "views"));
@@ -66,12 +68,13 @@ app.use(cookieParser());
 //http 프로토콜은 통신이 끝나면 상태 정보를 저장하지 않기 때문에, 유저가 다시 접속 시 이전 화면을 보여주는 등 상태에 대한 저장이 필요할 때 사용
 app.use(express.static(path.join(__dirname, "public")));
 //static(전 경로에서 참조할 수 있는) 루트 디렉토리를 설정해 줌
-app.use(passport.initialize())
+app.use(passport.initialize());
 
 app.use("/", indexRouter); // 127.0.0.1:3000
 app.use("/user", usersRouter); // 127.0.0.1:3000/user
 app.use("/deliv_info", delivInfoRouter);
-app.use("/auth", authRouter);
+app.use("/board" , boardRouter);
+app.use("/board_img", boardImgRouter);
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
     next(createError(404));

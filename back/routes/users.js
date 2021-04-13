@@ -5,6 +5,8 @@ const db = require("../components/db");
 const model = require("../models/user");
 const deliv_info_model = require("../models/deliv_info");
 const crypto = require("../components/crypto");
+const { isNotLoggedIn, isLoggedIn } = require("./middlewares");
+const passport = require("passport");
 
 router.post("/signup", async function (req, res, next) {
   const body = req.body; // {name:asdf,price:200}
@@ -88,6 +90,18 @@ router.get("/", async function (req, res, next) {
     next(err);
   }
 });
+
+// app.use("/user", usersRouter); // 127.0.0.1:3000/user
+router.get("/kakao", passport.authenticate("kakao"));
+router.get("/kakao/callback",passport.authenticate("kakao", {
+  failureRedirect: "/",
+  session: false
+}),(req, res) => {
+  res.send("user : " + JSON.stringify(req.user));
+  // res.redirect("/");
+});
+
+//로그아웃
 
 
 module.exports = router;
