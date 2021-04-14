@@ -14,6 +14,7 @@ import { IoMdHeartEmpty, IoMdHeart } from "react-icons/io";
 import useInput from "../../hooks/useInput";
 import {useSelector , useDispatch} from 'react-redux';
 import { useHistory } from 'react-router-dom';
+import Slick from 'react-slick';
 
 const TodayBody=()=> {
   const history = useHistory();
@@ -22,6 +23,8 @@ const TodayBody=()=> {
   const [content, setContent] = useState("쉽게 나갈 수 없는 지금 배경화면에서 봄을 만끽해봐요");
   const [commentCount , setCommentCount] = useState(71);
   const [commentUser , setCommentUser] = useState("a****7");
+
+  const [currentSlide, setCurrentSlide] = useState(0);
 
   return (
     <div>
@@ -37,6 +40,9 @@ const TodayBody=()=> {
       <UserContentImg>
         <img src={`${content_bear_img}`} alt="" height="400" />
       </UserContentImg>
+      {/* <Slick initialSlide={0} slidesToShow={1} slidesToScroll={1} dots={true}>
+
+      </Slick> */}
       {heart ? <IoMdHeartEmpty /> : <IoMdHeart />}
       <Like>좋아요 {Likecount} 개</Like>
       <Content>{content}</Content>
@@ -45,7 +51,14 @@ const TodayBody=()=> {
         <div className="comment_user">{commentUser}</div>
         <div className="comment_content">배경화면 너무 귀여워!! 보자마자 좋아요눌렀어여</div>
       </CommentUser>
-      <InputCustom type="text" readonly placeholder="댓글을 달아주세요" onClick={()=>{history.push("/")}} />
+      <InputCustom
+        type="text"
+        readonly
+        placeholder="댓글을 달아주세요"
+        onClick={() => {
+          history.push('/');
+        }}
+      />
     </div>
   );
 }
