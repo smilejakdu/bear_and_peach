@@ -21,7 +21,9 @@ const ProductsBody=()=> {
     <ProductsContainer>
       {mainProducts.map((product) => (
         <div key={product.id} className="product_content_body">
-          <img src={`${product.image}`} alt="" />
+          <ProductImg>
+            <img src={`${product.image}`} alt="" height="400" />
+          </ProductImg>
           <div className="product_text">{product.text}</div>
           <div className="product_price">{product.price}</div>
         </div>

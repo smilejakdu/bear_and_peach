@@ -23,7 +23,9 @@ const ProductsContainer = styled.div`
 `;
 
 const ProductImg = styled.div`
-    
+  img{
+    width: 100%;
+  }
 `;
 
 export { ProductImg, ProductsContainer };
