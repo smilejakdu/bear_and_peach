@@ -6,8 +6,8 @@ import {
   Content,
   CommentCount,
   CommentUser,
-  InputCustom
-} from "./UserProfile.style";
+  InputBorderCustom,
+} from './UserProfile.style';
 import bear_img from "../../utils/images/bear.png"
 import content_bear_img from "../../utils/images/bear2.png"
 import { IoMdHeartEmpty, IoMdHeart } from "react-icons/io";
@@ -51,14 +51,15 @@ const TodayBody=()=> {
         <div className="comment_user">{commentUser}</div>
         <div className="comment_content">배경화면 너무 귀여워!! 보자마자 좋아요눌렀어여</div>
       </CommentUser>
-      <InputCustom
-        type="text"
-        readonly
-        placeholder="댓글을 달아주세요"
-        onClick={() => {
-          history.push('/');
-        }}
-      />
+      <InputBorderCustom
+        onClick={() => {history.push('/');}}>
+        댓글을 달아주세요.
+      </InputBorderCustom>
+      {/* input 에 padding 지양 */}
+      {/* 스타일 초기화는 무조건 해야한다. */}
+      {/* padidng 과 margin 초기.. */}
+      {/* 브라우저마다 다르다. */}
+      {/* p 태그 사용해서 해볼것 */}
     </div>
   );
 }

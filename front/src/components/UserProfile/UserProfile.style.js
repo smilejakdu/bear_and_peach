@@ -74,25 +74,22 @@ const CommentUser = styled.div`
   }
 `;
 
-const InputCustom = styled.input`
-  outline:none;
-  border:none;
-  padding:8px;
-  padding-right:50px;
-  background-color:${palette.gray[3]};
-  color:transparent;
-  border-radius:5px 20px 20px 20px;
-  &:hover{
+const InputBorderCustom = styled.p`
+  width: auto;
+  display: flex;
+  background-color: ${palette.gray[2]};
+  border-radius: 5px 20px 20px 20px;
+  padding: 4px;
+  font-size:12px;
+  margin-top: 10px;
+  padding: 8px;
+  margin-top: 10px;
+  border-radius: 5px 20px 20px 20px;
+  color:gray;
+  &:hover {
     cursor: pointer;
   }
 `;
 
-export {
-  UserProfileBorder,
-  UserContentImg,
-  Like,
-  Content,
-  CommentCount,
-  CommentUser,
-  InputCustom,
-};
+
+export { UserProfileBorder, UserContentImg, Like, Content, CommentCount, CommentUser, InputBorderCustom };
