@@ -59,20 +59,23 @@ module.exports.getList = async (options) => {
 };
 
 module.exports.multipleInsert = async (options, connection) => {
+  console.log("today_board_img_options",options);
+  console.log("today_board_img_connection" , connection);
   try {
     let sql = `INSERT INTO today_board_img
                                 (
-                                    today_board_id, 
+                                    today_board_idx, 
                                     img_path
                                 ) 
                     VALUES ?`;
 
     return await db.query({
       connection: connection,
-      sql: sql,
+      query: sql,
       values: [options],
     });
   } catch (e) {
+    console.log('e????',e)
     throw new Error(e);
   }
 };

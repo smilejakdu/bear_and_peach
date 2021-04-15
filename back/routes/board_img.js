@@ -2,7 +2,7 @@ var express = require("express");
 var router = express.Router();
 
 const db = require("../components/db");
-const model = require("../models/board_img");
+const model = require("../models/today_board_img");
 
 const formidable = require("formidable");
 const path = require("path");
