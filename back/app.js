@@ -13,9 +13,10 @@ passportConfig(passport);
 var indexRouter = require("./routes/index");
 var usersRouter = require("./routes/users");
 var delivInfoRouter = require("./routes/deliv_info");
-var boardRouter = require("./routes/board");
-var boardImgRouter = require("./routes/board_img");
+var todayboardRouter = require("./routes/today_board");
+var todayboardImgRouter = require("./routes/today_board_img");
 var kakaoImgRouter = require("./routes/kakao_character_img");
+var commentRouter = require("./routes/comment");
 var app = express();
 
 const swaggerDefinition = {
@@ -74,9 +75,10 @@ app.use(passport.initialize());
 app.use("/", indexRouter); // 127.0.0.1:3000
 app.use("/user", usersRouter); // 127.0.0.1:3000/user
 app.use("/deliv_info", delivInfoRouter);
-app.use("/board" , boardRouter);
-app.use("/board_img", boardImgRouter);
+app.use("/today_board", todayboardRouter);
+app.use("/today_board_img", todayboardImgRouter);
 app.use("/kakao_img", kakaoImgRouter);
+app.use("/comment" , commentRouter);
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
     next(createError(404));

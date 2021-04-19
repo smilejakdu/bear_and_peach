@@ -39,14 +39,14 @@ module.exports.delete = async (connection, options) => {
 };
 
 module.exports.getList = async (options) => {
-  console.log("options : ", options);
+  console.log("today_board_img test : ", options);
   try {
-    const { goods_idx } = options;
+    const { today_board_idx } = options;
     let query = "SELECT * FROM today_board_img";
     let values;
-    if (goods_idx) {
+    if (today_board_idx) {
       query += " WHERE today_board_idx = ?";
-      values = goods_idx;
+      values = today_board_idx;
     }
     return await db.query({
       // connection:connection,
@@ -59,8 +59,6 @@ module.exports.getList = async (options) => {
 };
 
 module.exports.multipleInsert = async (options, connection) => {
-  console.log("today_board_img_options",options);
-  console.log("today_board_img_connection" , connection);
   try {
     let sql = `INSERT INTO today_board_img
                                 (
