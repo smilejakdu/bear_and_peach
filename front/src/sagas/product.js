@@ -9,7 +9,7 @@ function loadProductsAPI(){
 function* loadProducts(action){
   try{
     const result = yield call(loadProductsAPI);
-    yield delay(1000);
+    // yield delay(1000);
     const { data :{ product_content }} = result;
     yield put({
       type:LOAD_PRODUCTS_SUCCESS,
