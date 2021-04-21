@@ -4,6 +4,7 @@ var router = express.Router();
 const db = require("../components/db");
 const model = require("../models/user");
 const deliv_info_model = require("../models/deliv_info");
+const my_active_model = require("../models/my_active");
 const crypto = require("../components/crypto");
 const { isNotLoggedIn, isLoggedIn } = require("./middlewares");
 const passport = require("passport");
@@ -80,7 +81,9 @@ router.get("/", async function (req, res, next) {
     const user_idx = req.query.user_idx;
     const result = await model.getList({ user_idx: user_idx });
     const diResult = await deliv_info_model.getList({ user_idx: user_idx });
+    const myActiveResult = await my_active_model.getList({user_idx :user_idx});
     result[0].deliv_info = diResult;
+    result[0].my_active = myActiveResult;
     console.log(result);
     delete result[0].password;
     delete result[0].salt;

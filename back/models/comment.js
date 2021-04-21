@@ -12,7 +12,14 @@ module.exports.insert = async (connection, options) => {
 };
 
 module.exports.update = async (connection, options) => {
-  console.log("options : ", options); // {idx :2, name:'ssdf'}
+  console.log("options : ", options);
+  //   {
+  //   comment_idx : 3,
+  //   user_idx: 6,
+  //   today_board_idx: 14,
+  //   content: 'today_board 15 nickname test index 6 content_update test ',
+  //   likes: 2
+  // }
   let query = "UPDATE comment SET ? WHERE comment_idx = ?";
   return await db.query({
     connection: connection,

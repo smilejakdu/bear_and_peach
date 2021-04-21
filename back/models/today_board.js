@@ -40,8 +40,8 @@ module.exports.getList = async (options) => {
     // left join 은 today_board 기준 인거다.
     // right join 은 comment 기준
     // let query = `SELECT * FROM today_board
-    //                  LEFT JOIN comment ON today_board.today_board_idx = comment.today_board_idx
-    //                  LEFT JOIN today_board_img ON today_board.today_board_idx = today_board_img.today_board_idx
+    //                  RIGHT JOIN comment ON today_board.today_board_idx = comment.today_board_idx
+    //                  RIGHT JOIN today_board_img ON today_board.today_board_idx = today_board_img.today_board_idx
     //                 `;
 
     let query = `SELECT * FROM today_board`
