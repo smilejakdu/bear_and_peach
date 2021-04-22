@@ -4,7 +4,6 @@ var router = express.Router();
 const db = require("../components/db");
 const model = require("../models/user");
 const deliv_info_model = require("../models/deliv_info");
-const my_active_model = require("../models/my_active");
 const crypto = require("../components/crypto");
 const { isNotLoggedIn, isLoggedIn } = require("./middlewares");
 const passport = require("passport");

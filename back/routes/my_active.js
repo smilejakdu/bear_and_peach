@@ -2,7 +2,9 @@ var express = require("express");
 var router = express.Router();
 
 const db = require("../components/db");
-const my_active_model = require("../models/my_active");
+const today_board_my_active_model = require("../models/today_board")
+const comment_model = require("../models/comment")
+
 
 router.post("/", async function (req, res, next) {
   const body = req.body; // {name:asdf,price:200}
@@ -48,10 +50,21 @@ router.delete("/", async function (req, res, next) {
 });
 
 router.get("/", async function (req, res, next) {
-  const comment_idx = req.query.comment_idx;
-  // const result = await model.getList({comment_idx:comment_idx})
-  const result = await my_active_model.getList(req.query);
-  res.status(200).json({ result });
+  const my_active_idx = req.query.my_active_idx;
+  const result={
+    "today_board_likes":[],
+    "comment_likes":[],
+    "comment_content":[]
+  }
+  const today_board_likes_result = await today_board_my_active_model.getMyActiveList(req.query);
+  const comment_likes_result = await comment_model.getMyActiveLikesList(req.query);
+  const comment_content_result = await comment_model.getMyActiveContentList(req.query);
+
+  result.today_board_likes = today_board_likes_result
+  result.comment_likes = comment_likes_result
+  result.comment_content = comment_content_result
+  
+  res.status(200).json(result);
 });
 
 module.exports = router;

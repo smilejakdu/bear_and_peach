@@ -20,7 +20,7 @@ module.exports.update = async (connection, options) => {
   //   content: 'today_board 15 nickname test index 6 content_update test ',
   //   likes: 2
   // }
-  let query = "UPDATE my_active SET ? WHERE my_active_idx = ?";
+  let query = "UPDATE my_active SET ? WHERE comment_idx = ?";
   return await db.query({
     connection: connection,
     query: query,
@@ -30,7 +30,7 @@ module.exports.update = async (connection, options) => {
 
 module.exports.delete = async (connection, options) => {
   console.log("options : ", options.idx); // {idx :2, name:'ssdf'}
-  let query = "DELETE FROM my_active WHERE my_active_idx = ?";
+  let query = "DELETE FROM my_active WHERE comment_idx = ?";
   return await db.query({
     connection: connection,
     query: query,
@@ -39,19 +39,25 @@ module.exports.delete = async (connection, options) => {
 };
 
 module.exports.getList = async (options) => {
-  const { user_idx } = options;
-  let query = "SELECT * FROM my_active ";
-  // let query = 'SELECT * FROM user WHERE 1=1 '
-  let values = [];
-  let keys = Object.keys(options);
-  console.log("my_active keys : ", keys);
-  if (user_idx) {
-    query += " WHERE user_idx = ?";
-    values.push(user_idx);
+  console.log("options : ", options);
+  try {
+    const { user_idx } = options;
+    console.log("user_idx : " , user_idx);
+    // let query = "SELECT * FROM my_active";
+    let today_board_likes_query = `SELECT * FROM today_board_user as tdu
+                                    JOIN user on user.user_idx = tdu.user_idx
+                                    JOIN today_board on today_board.today_board_idx = tdu.today_board_idx
+                                    `
+    let values;
+    if (user_idx){
+      today_board_likes_query += ' WHERE user.user_idx = ?';
+      values = user_idx
+      return await db.query({
+        query: today_board_likes_query,
+        values: values,
+      });
+    }
+  } catch (err) {
+    throw new Error(err);
   }
-  return await db.query({
-    // connection:connection,
-    query: query,
-    values: values,
-  });
 };

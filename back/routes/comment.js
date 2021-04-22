@@ -3,7 +3,6 @@ var router = express.Router();
 
 const db = require("../components/db");
 const model = require("../models/comment");
-const my_active_model = require("../models/my_active")
 
 router.post("/", async function (req, res, next) {
   const body = req.body; // {name:asdf,price:200}

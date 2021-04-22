@@ -65,3 +65,28 @@ module.exports.getList = async (options) => {
     throw new Error(err);
   }
 };
+
+module.exports.getMyActiveList = async (options) => {
+  console.log("options : ", options);
+  try {
+    const { user_idx } = options;
+    console.log("user_idx : ", user_idx);
+    // let query = "SELECT * FROM my_active";
+    let query = `SELECT * FROM today_board_user as tdu
+                                    JOIN user on user.user_idx = tdu.user_idx
+                                    JOIN today_board on today_board.today_board_idx = tdu.today_board_idx
+                                    `;
+    let values;
+    if (user_idx) {
+      query += " WHERE user.user_idx = ?";
+      values = user_idx;
+      return await db.query({
+        query: query,
+        values: values,
+      });
+    }
+  } catch (err) {
+    throw new Error(err);
+  }
+};
+
