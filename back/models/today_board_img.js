@@ -58,6 +58,27 @@ module.exports.getList = async (options) => {
   }
 };
 
+module.exports.myActivgetList = async (options) => {
+  console.log("today_board_img test : ", options);
+  try {
+    const { today_board_idx } = options;
+
+    if (today_board_idx) {
+      let query = `SELECT img_path FROM today_board_img
+                    WHERE today_board_idx = ? LIMIT 1 `;
+      let values = today_board_idx;
+
+      return await db.query({
+        // connection:connection,
+        query: query,
+        values: values,
+      });
+    }
+  } catch (err) {
+    throw new Error(err);
+  }
+};
+
 module.exports.multipleInsert = async (options, connection) => {
   try {
     let sql = `INSERT INTO today_board_img

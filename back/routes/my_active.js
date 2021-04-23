@@ -3,7 +3,9 @@ var router = express.Router();
 
 const db = require("../components/db");
 const today_board_my_active_model = require("../models/today_board")
-const comment_model = require("../models/comment")
+const today_board_img_model =require("../models/today_board_img")
+const comment_model = require("../models/comment");
+const { log } = require("debug");
 
 
 router.post("/", async function (req, res, next) {
@@ -57,6 +59,11 @@ router.get("/", async function (req, res, next) {
     "comment_content":[]
   }
   const today_board_likes_result = await today_board_my_active_model.getMyActiveList(req.query);
+
+  const {today_board_idx} = today_board_likes_result[0]
+  const today_board_img = await today_board_img_model.myActivgetList({today_board_idx: today_board_idx});
+  today_board_likes_result[0].image = today_board_img[0].img_path
+
   const comment_likes_result = await comment_model.getMyActiveLikesList(req.query);
   const comment_content_result = await comment_model.getMyActiveContentList(req.query);
 

@@ -72,10 +72,10 @@ module.exports.getMyActiveList = async (options) => {
     const { user_idx } = options;
     console.log("user_idx : ", user_idx);
     // let query = "SELECT * FROM my_active";
-    let query = `SELECT * FROM today_board_user as tdu
-                                    JOIN user on user.user_idx = tdu.user_idx
-                                    JOIN today_board on today_board.today_board_idx = tdu.today_board_idx
-                                    `;
+    let query = `SELECT tb.title ,tdu.created_at , tb.today_board_idx
+                FROM today_board_user as tdu
+                JOIN user on user.user_idx = tdu.user_idx
+                JOIN today_board as tb on tb.today_board_idx = tdu.today_board_idx `;
     let values;
     if (user_idx) {
       query += " WHERE user.user_idx = ?";
