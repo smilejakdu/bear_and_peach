@@ -75,11 +75,9 @@ module.exports.getMyActiveLikesList = async (options) => {
   console.log("comment_options : ", options);
   try {
     const { user_idx } = options;
-    // let query = "SELECT * FROM comment";
     let query = `SELECT * FROM comment_user as cu
                   JOIN user on user.user_idx = cu.user_idx
-                  JOIN comment on comment.comment_idx = cu.comment_idx
-                  `;
+                  JOIN comment on comment.comment_idx = cu.comment_idx `;
     let values;
     if (user_idx){
       query += " WHERE user.user_idx = ?";
@@ -105,9 +103,9 @@ module.exports.getMyActiveContentList = async (options) => {
   try {
     const { user_idx } = options;
     // let query = "SELECT * FROM comment";
-    let query = `SELECT * FROM comment 
-                  JOIN user on user.user_idx = comment.user_idx
-                  JOIN today_board on today_board.today_board_idx = comment.today_board_idx
+    let query = `SELECT comment.created_at , comment.today_board_idx , comment.user_idx FROM comment 
+                JOIN user on user.user_idx = comment.user_idx
+                JOIN today_board as tb on tb.today_board_idx = comment.today_board_idx
                   `;
     let values;
     if (user_idx) {

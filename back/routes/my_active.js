@@ -59,13 +59,24 @@ router.get("/", async function (req, res, next) {
     "comment_content":[]
   }
   const today_board_likes_result = await today_board_my_active_model.getMyActiveList(req.query);
-
-  const {today_board_idx} = today_board_likes_result[0]
-  const today_board_img = await today_board_img_model.myActivgetList({today_board_idx: today_board_idx});
+  const today_board_img = await today_board_img_model.myActivgetList({today_board_idx:
+                                                                      today_board_likes_result[0].today_board_idx});
   today_board_likes_result[0].image = today_board_img[0].img_path
+  today_board_likes_result[0].likes = true;
 
   const comment_likes_result = await comment_model.getMyActiveLikesList(req.query);
   const comment_content_result = await comment_model.getMyActiveContentList(req.query);
+
+  if (comment_content_result &&  comment_content_result.length>0){
+    for (let i = 0; i< comment_content_result.length; i++){
+      const today_board_title = await today_board_my_active_model.getTodayBoardCommentList(
+        { today_board_idx: comment_content_result[i].today_board_idx });
+
+        comment_content_result[i].content = "게시물에 댓글을 작성했습니다.";
+        comment_content_result[i].title = today_board_title[0].title;
+        comment_content_result[i].img_path = today_board_title[0].img_path;
+    }
+  }
 
   result.today_board_likes = today_board_likes_result
   result.comment_likes = comment_likes_result
@@ -75,3 +86,4 @@ router.get("/", async function (req, res, next) {
 });
 
 module.exports = router;
+        

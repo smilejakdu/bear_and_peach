@@ -90,3 +90,25 @@ module.exports.getMyActiveList = async (options) => {
   }
 };
 
+module.exports.getTodayBoardCommentList = async (options) => {
+  console.log("options : ", options);
+  // "today_board_idx": 14,
+  try {
+    const { today_board_idx } = options;
+    console.log("today_board_idx : ", today_board_idx);
+
+    if (today_board_idx) {
+      let query = `SELECT tb.title , tbi.img_path
+                  FROM today_board as tb 
+                  JOIN today_board_img as tbi on tbi.today_board_idx = tb.today_board_idx `;
+      query += " WHERE tb.today_board_idx = ? LIMIT 1 ";
+      let values = today_board_idx;
+      return await db.query({
+        query: query,
+        values: values,
+      });
+    }
+  } catch (err) {
+    throw new Error(err);
+  }
+};
