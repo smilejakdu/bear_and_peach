@@ -26,18 +26,22 @@ const CategoryLinkItem = styled(NavLink)`
   padding: 6px 8px 6px 16px;
   margin-right: 3px;
   text-decoration: none;
-  font-size: 25px;
+  font-size: 18px;
   color: black;
   display: block;
+
+  &.hover{
+    border-bottom: 3px solid ${palette.base_clor[1]};
+  }
 
   &.active {
     color:black;
     font-weight: bold;
-    border-bottom: 1px solid ${palette.base_clor[1]};
+    border-bottom: 3px solid ${palette.base_clor[1]};
   }
 
   @media (max-width: 850px) {
-    font-size: 20px;
+    font-size: 18px;
   }
 `;
 
