@@ -5,9 +5,10 @@ const db = require("../components/db");
 const model = require("../models/user");
 const deliv_info_model = require("../models/deliv_info");
 const crypto = require("../components/crypto");
-const { isNotLoggedIn, isLoggedIn } = require("./middlewares");
+const { isNotLoggedIn, isLoggedIn, verifyToken } = require("./middlewares");
 const passport = require("passport");
 const jwt = require("jsonwebtoken");
+const secretKey = require("../config/secret_key");
 
 router.post("/signup", async function (req, res, next) {
   const body = req.body; // {name:asdf,price:200}
@@ -69,7 +70,7 @@ router.post("/signin", async function (req, res, next) {
     }
     // jwt token 생성
     const token = jwt.sign(
-      { id: newResult.user_idx, nickname: newResult.nickname },
+      { user_idx: newResult.user_idx },
       "jwt",
     );
     newResult.token = token
@@ -83,12 +84,14 @@ router.post("/signin", async function (req, res, next) {
   }
 });
 
-router.get("/", async function (req, res, next) {
+router.get("/", verifyToken, async function (req, res, next) {
   try {
     const user_idx = req.query.user_idx;
     const result = await model.getList({ user_idx: user_idx });
     const diResult = await deliv_info_model.getList({ user_idx: user_idx });
-    const myActiveResult = await my_active_model.getList({user_idx :user_idx});
+    const myActiveResult = await my_active_model.getList({
+      user_idx: user_idx,
+    });
     result[0].deliv_info = diResult;
     result[0].my_active = myActiveResult;
     console.log(result);
@@ -111,29 +114,12 @@ router.get("/kakao/callback",passport.authenticate("kakao", {
   // res.redirect("/");
 });
 
-
-router.get("/auth", function (req, res, next) {
-  let token = req.cookies.user;
-  console.log(token);
-  let decoded = jwt.verify(token, secretObj.secret);
-  console.log(decoded);
-  if (decoded) {
-    res.send("권한이 있어서 API 수행 가능");
-  } else {
-    res.send("권한이 없습니다.");
-  }
+// auth token test 
+  router.get("/auth", verifyToken , function (req, res, next) {
+  console.log("start auth");
+  console.log("auth req :" , req.decoded);
+  console.log("end auth : ");
+  return res.status(200).send("auth token 테스트입니다.")
 });
-
-router.get("/auth2",passport.authenticate("jwt", { session: false }),
-  async (req, res, next) => {
-    try {
-      res.json({ result: true });
-    } catch (error) {
-      console.error(error);
-      next(error);
-    }
-  }
-);
-
 
 module.exports = router;

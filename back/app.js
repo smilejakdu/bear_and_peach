@@ -18,6 +18,8 @@ var todayboardImgRouter = require("./routes/today_board_img");
 var kakaoImgRouter = require("./routes/kakao_character_img");
 var commentRouter = require("./routes/comment");
 var myActiveRouter = require("./routes/my_active");
+var tokenRouter = require("./routes/token");
+
 var app = express();
 
 const swaggerDefinition = {
@@ -81,6 +83,7 @@ app.use("/today_board_img", todayboardImgRouter);
 app.use("/kakao_img", kakaoImgRouter);
 app.use("/comment" , commentRouter);
 app.use("/my_active", myActiveRouter);
+app.use("/token" , tokenRouter);
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
     next(createError(404));

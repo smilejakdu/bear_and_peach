@@ -5,10 +5,11 @@ const db = require("../components/db");
 const today_board_my_active_model = require("../models/today_board")
 const today_board_img_model =require("../models/today_board_img")
 const comment_model = require("../models/comment");
+const { verifyToken } = require("./middlewares")
 const { log } = require("debug");
 
 
-router.post("/", async function (req, res, next) {
+router.post("/",verifyToken, async function (req, res, next) {
   const body = req.body; // {name:asdf,price:200}
   console.log("body : ", body);
   try {
@@ -22,7 +23,7 @@ router.post("/", async function (req, res, next) {
   }
 });
 
-router.put("/", async function (req, res, next) {
+router.put("/",verifyToken, async function (req, res, next) {
   try {
     const json = req.body; // {idx :2, name:'ssdf'}
     const connection = await db.beginTransaction();
@@ -36,7 +37,7 @@ router.put("/", async function (req, res, next) {
   }
 });
 
-router.delete("/", async function (req, res, next) {
+router.delete("/",verifyToken, async function (req, res, next) {
   const json = req.body;
   try {
     const connection = await db.beginTransaction();
@@ -51,7 +52,7 @@ router.delete("/", async function (req, res, next) {
   }
 });
 
-router.get("/", async function (req, res, next) {
+router.get("/",verifyToken, async function (req, res, next) {
   const my_active_idx = req.query.my_active_idx;
   const result={
     "today_board_likes":[],
