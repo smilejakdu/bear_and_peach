@@ -55,7 +55,6 @@ router.get("/", async function (req, res, next) {
   const my_active_idx = req.query.my_active_idx;
   const result={
     "today_board_likes":[],
-    "comment_likes":[],
     "comment_content":[]
   }
   const today_board_likes_result = await today_board_my_active_model.getMyActiveList(req.query);
@@ -64,7 +63,6 @@ router.get("/", async function (req, res, next) {
   today_board_likes_result[0].image = today_board_img[0].img_path
   today_board_likes_result[0].likes = true;
 
-  const comment_likes_result = await comment_model.getMyActiveLikesList(req.query);
   const comment_content_result = await comment_model.getMyActiveContentList(req.query);
 
   if (comment_content_result &&  comment_content_result.length>0){
@@ -78,12 +76,13 @@ router.get("/", async function (req, res, next) {
     }
   }
 
+  // today_board_likes_result 게시글 좋아요
+  // comment_content_result 댓글을 작성했습니다
+
   result.today_board_likes = today_board_likes_result
-  result.comment_likes = comment_likes_result
   result.comment_content = comment_content_result
   
   res.status(200).json(result);
 });
 
 module.exports = router;
-        

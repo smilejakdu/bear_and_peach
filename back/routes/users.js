@@ -7,6 +7,7 @@ const deliv_info_model = require("../models/deliv_info");
 const crypto = require("../components/crypto");
 const { isNotLoggedIn, isLoggedIn } = require("./middlewares");
 const passport = require("passport");
+const jwt = require("jsonwebtoken");
 
 router.post("/signup", async function (req, res, next) {
   const body = req.body; // {name:asdf,price:200}
@@ -66,6 +67,13 @@ router.post("/signin", async function (req, res, next) {
     } else {
       throw { status: 401, errorMessage: "Authentication failed" };
     }
+    // jwt token 생성
+    const token = jwt.sign(
+      { id: newResult.user_idx, nickname: newResult.nickname },
+      "jwt",
+    );
+    newResult.token = token
+
     delete newResult.password;
     delete newResult.salt;
     res.json({ result: newResult });
@@ -103,7 +111,29 @@ router.get("/kakao/callback",passport.authenticate("kakao", {
   // res.redirect("/");
 });
 
-//로그아웃
+
+router.get("/auth", function (req, res, next) {
+  let token = req.cookies.user;
+  console.log(token);
+  let decoded = jwt.verify(token, secretObj.secret);
+  console.log(decoded);
+  if (decoded) {
+    res.send("권한이 있어서 API 수행 가능");
+  } else {
+    res.send("권한이 없습니다.");
+  }
+});
+
+router.get("/auth2",passport.authenticate("jwt", { session: false }),
+  async (req, res, next) => {
+    try {
+      res.json({ result: true });
+    } catch (error) {
+      console.error(error);
+      next(error);
+    }
+  }
+);
 
 
 module.exports = router;
