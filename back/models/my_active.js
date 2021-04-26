@@ -44,9 +44,9 @@ module.exports.getList = async (options) => {
     const { user_idx } = options;
     console.log("user_idx : " , user_idx);
     // let query = "SELECT * FROM my_active";
-    let today_board_likes_query = `SELECT * FROM today_board_user as tdu
-                                    JOIN user on user.user_idx = tdu.user_idx
-                                    JOIN today_board on today_board.today_board_idx = tdu.today_board_idx
+    let today_board_likes_query = `SELECT * FROM today_board_likes as tdl
+                                    JOIN user on user.user_idx = tdl.user_idx
+                                    JOIN today_board on today_board.today_board_idx = tdl.today_board_idx
                                     `
     let values;
     if (user_idx){

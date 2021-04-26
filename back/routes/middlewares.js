@@ -18,7 +18,6 @@ exports.isNotLoggedIn = (req, res, next) => {
 
 exports.verifyToken = (req, res, next) => {
   try {
-
     if(!req.headers){
       return res.status(419).json({code: 400,message: "does not exist headers"});
     }

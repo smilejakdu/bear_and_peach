@@ -37,32 +37,20 @@ router.put("/",verifyToken, async function (req, res, next) {
   }
 });
 
-router.delete("/",verifyToken, async function (req, res, next) {
-  const json = req.body;
-  try {
-    const connection = await db.beginTransaction();
-    const result = await my_active_model.delete(connection, {
-      comment_idx: json.comment_idx,
-    });
-    await db.commit(connection);
-    res.json({ result });
-  } catch (err) {
-    console.log("err : ", err);
-    next(err);
-  }
-});
 
 router.get("/",verifyToken, async function (req, res, next) {
   const my_active_idx = req.query.my_active_idx;
-  const result={
-    "today_board_likes":[],
-    "comment_content":[]
-  }
   const today_board_likes_result = await today_board_my_active_model.getMyActiveList(req.query);
-  const today_board_img = await today_board_img_model.myActivgetList({today_board_idx:
-                                                                      today_board_likes_result[0].today_board_idx});
-  today_board_likes_result[0].image = today_board_img[0].img_path
-  today_board_likes_result[0].likes = true;
+  if (today_board_likes_result && today_board_likes_result.length >0){
+    for(let i =0; i< today_board_likes_result.length; i++){
+      const today_board_img = await today_board_img_model.myActivgetList({today_board_idx:
+                                                                      today_board_likes_result[i].today_board_idx});
+
+      today_board_likes_result[i].image = today_board_img[0].img_path
+      today_board_likes_result[i].table = "today_board";
+      today_board_likes_result[i].content = "게시물을 좋아했습니다";
+    }
+  }
 
   const comment_content_result = await comment_model.getMyActiveContentList(req.query);
 
@@ -74,16 +62,19 @@ router.get("/",verifyToken, async function (req, res, next) {
         comment_content_result[i].content = "게시물에 댓글을 작성했습니다.";
         comment_content_result[i].title = today_board_title[0].title;
         comment_content_result[i].img_path = today_board_title[0].img_path;
+        comment_content_result[i].table = "comment"
     }
   }
 
   // today_board_likes_result 게시글 좋아요
   // comment_content_result 댓글을 작성했습니다
-
-  result.today_board_likes = today_board_likes_result
-  result.comment_content = comment_content_result
-  
-  res.status(200).json(result);
+  console.log(today_board_likes_result);
+  console.log(comment_content_result);
+  result = [...today_board_likes_result , ...comment_content_result]
+  result = result.sort(function (a, b) {
+    return b.created_at - a.created_at
+  });
+  res.status(200).json({result:result});
 });
 
 module.exports = router;

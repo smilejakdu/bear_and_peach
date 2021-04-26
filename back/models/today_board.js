@@ -44,11 +44,12 @@ module.exports.getList = async (options) => {
     //                  RIGHT JOIN today_board_img ON today_board.today_board_idx = today_board_img.today_board_idx
     //                 `;
 
-    let query = `SELECT * FROM today_board`
-    
+    let query = `SELECT *  FROM today_board as tb
+                LEFT JOIN today_board_likes as tbl ON tbl.today_board_idx = tb.today_board_idx `
+  //  # SELECT * FROM (SELECT * FROM products ORDER BY no DESC) as A WHERE A.no <= 3; 
     let values;
     if (today_board_idx) {
-      query += " WHERE today_board.today_board_idx = ?";
+      query += " WHERE tb.today_board_idx = ? ";
       // query += " WHERE today_board_idx = ?";
       // 이렇게 코드를 작성하게 되면
       // error :  Error: Error: ER_NON_UNIQ_ERROR: Column 'today_board_idx' in where clause is ambiguous
@@ -72,8 +73,8 @@ module.exports.getMyActiveList = async (options) => {
     const { user_idx } = options;
     console.log("user_idx : ", user_idx);
     // let query = "SELECT * FROM my_active";
-    let query = `SELECT tb.title ,tdu.created_at , tb.today_board_idx
-                FROM today_board_user as tdu
+    let query = `SELECT tb.title ,tdu.created_at , tb.today_board_idx , user.user_idx
+                FROM likes as tdu
                 JOIN user on user.user_idx = tdu.user_idx
                 JOIN today_board as tb on tb.today_board_idx = tdu.today_board_idx `;
     let values;

@@ -118,6 +118,7 @@ router.get("/kakao/callback",passport.authenticate("kakao", {
   router.get("/auth", verifyToken , function (req, res, next) {
   console.log("start auth");
   console.log("auth req :" , req.decoded);
+  model
   console.log("end auth : ");
   return res.status(200).send("auth token 테스트입니다.")
 });

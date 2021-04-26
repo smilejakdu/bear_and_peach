@@ -14,6 +14,7 @@ var indexRouter = require("./routes/index");
 var usersRouter = require("./routes/users");
 var delivInfoRouter = require("./routes/deliv_info");
 var todayboardRouter = require("./routes/today_board");
+var todayboardLikesRouter = require("./routes/today_board_likes");
 var todayboardImgRouter = require("./routes/today_board_img");
 var kakaoImgRouter = require("./routes/kakao_character_img");
 var commentRouter = require("./routes/comment");
@@ -84,6 +85,7 @@ app.use("/kakao_img", kakaoImgRouter);
 app.use("/comment" , commentRouter);
 app.use("/my_active", myActiveRouter);
 app.use("/token" , tokenRouter);
+app.use("/todayboardLikesRouter", todayboardLikesRouter);
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
     next(createError(404));
