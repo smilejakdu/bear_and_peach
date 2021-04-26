@@ -12,9 +12,10 @@ module.exports.insert = async (connection, options) => {
 };
 
 module.exports.delete = async (connection, options) => {
-  console.log("options : ", options.idx); // {idx :2, name:'ssdf'}
+  console.log("options : ", options); // {idx :2, name:'ssdf'}
   let query = "DELETE FROM today_board_likes";
   let values = [];
+  const keys = Object.keys(options);
 
   if (keys && keys.length > 0) {
     for (let i = 0; i < keys.length; i++) {
@@ -29,9 +30,9 @@ module.exports.delete = async (connection, options) => {
   }
 
   return await db.query({
-    connection: connection,
+    // connection: connection,
     query: query,
-    values: options.comment_idx,
+    values: values,
   });
 };
 

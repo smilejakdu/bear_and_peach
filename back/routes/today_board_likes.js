@@ -1,29 +1,31 @@
 const express = require("express");
 const router = express.Router();
-
+const { verifyToken } = require("./middlewares");
 const db = require("../components/db");
-const today_board_model = require("../models/today_board");
-const today_board_img_model = require("../models/today_board_img");
-const comment_model = require("../models/comment");
+const today_board_likes_model = require("../models/today_board_likes");
 
 router.post("/", async function (req, res, next) {
   const body = req.body;
   console.log("body : ", body);
-  const images = body.images;
-  delete body.images;
   try {
     const connection = await db.beginTransaction();
-    const result = await today_board_model.insert(connection, body);
-    //get today_board_idx
-    const today_board_idx = result.insertId;
-    if (images && images.length > 0) {
-      // board_img multi insert
-      let imagesArray = [];
-      for (let i = 0; i < images.length; i++) {
-        imagesArray.push([today_board_idx, images[i]]);
-      }
-      await today_board_img_model.multipleInsert(imagesArray, connection);
-    }
+    const result = await today_board_likes_model.insert(connection, body);
+    await db.commit(connection);
+    res.json({ result });
+  } catch (err) {
+    console.log("err : ", err);
+    next(err);
+  }
+});
+
+// verifyToken 를 추가해줘서 today_board_idx 와 user_idx 를
+// 나중엔 query WHERE 에 넣어줘야한다. 지금은 일단 
+// today_board_idx , user_idx 를 그냥 body 로 넘겨주자.
+router.delete("/", async function (req, res, next) {
+  const json = req.body;
+  try {
+    const connection = await db.beginTransaction();
+    const result = await today_board_likes_model.delete(connection, json);
     await db.commit(connection);
     res.json({ result });
   } catch (err) {
@@ -33,32 +35,9 @@ router.post("/", async function (req, res, next) {
 });
 
 router.get("/", async function (req, res, next) {
-  try {
-    const query = req.query;
-    const result = await today_board_model.getList(query);
-    console.log("today_board result 40 : ", result);
-    console.log("------------------------");
-    if (result && result.length > 0) {
-      for (let i = 0; i < result.length; i++) {
-        const imgResult = await today_board_img_model.getList({
-          today_board_idx: result[i].today_board_idx,
-        });
-        console.log("imgResult47 :", imgResult);
-        result[i].images = imgResult;
-        result[i].repr_img = imgResult.length > 0 ? imgResult[0].img_path : "";
-        const commentResult = await comment_model.getList({
-          today_board_idx: result[i].today_board_idx,
-        });
-        result[i].comments = commentResult;
-        result[i].comment_cnt = commentResult.length;
-      }
-    }
-
-    res.status(200).json({ result });
-  } catch (err) {
-    console.log("err : ", err);
-    next(err);
-  }
+  console.log(req.query);
+  const result = await today_board_likes_model.getList(req.query);
+  res.status(200).json({ result });
 });
 
 module.exports = router;

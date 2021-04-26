@@ -85,7 +85,7 @@ app.use("/kakao_img", kakaoImgRouter);
 app.use("/comment" , commentRouter);
 app.use("/my_active", myActiveRouter);
 app.use("/token" , tokenRouter);
-app.use("/todayboardLikesRouter", todayboardLikesRouter);
+app.use("/today_board_likes", todayboardLikesRouter);
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
     next(createError(404));
