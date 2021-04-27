@@ -20,6 +20,8 @@ var kakaoImgRouter = require("./routes/kakao_character_img");
 var commentRouter = require("./routes/comment");
 var myActiveRouter = require("./routes/my_active");
 var tokenRouter = require("./routes/token");
+var productRouter = require("./routes/product");
+var productImgRouter = require("./routes/product_img");
 
 var app = express();
 
@@ -86,6 +88,8 @@ app.use("/comment" , commentRouter);
 app.use("/my_active", myActiveRouter);
 app.use("/token" , tokenRouter);
 app.use("/today_board_likes", todayboardLikesRouter);
+app.use("/product", productRouter);
+app.use("/product_img", productImgRouter);
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
     next(createError(404));

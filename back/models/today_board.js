@@ -43,7 +43,8 @@ module.exports.getList = async (options) => {
     let query='';
     let values;
     if (today_board_idx) {
-      query = `SELECT tb.title,tb.content , count(tbl.today_board_idx) as likes_cnt FROM today_board as tb
+      query = `SELECT tb.today_board_idx ,tb.title , tb.content , count(tbl.today_board_idx) as likes_cnt 
+                  FROM today_board as tb
                   LEFT JOIN today_board_likes as tbl ON tbl.today_board_idx = tb.today_board_idx
                   WHERE tb.today_board_idx = ? GROUP BY 1,2`
       values = today_board_idx;
@@ -57,9 +58,6 @@ module.exports.getList = async (options) => {
                   FROM today_board as tb
                   LEFT JOIN today_board_likes as tbl ON tbl.today_board_idx = tb.today_board_idx 
                   GROUP BY 1,2`;
-      console.log("-------------------------------------------------");
-      console.log(query);
-      console.log("-------------------------------------------------");
       return await db.query({
         query: query,
         values: '',
