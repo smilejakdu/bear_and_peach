@@ -37,21 +37,19 @@ router.get("/", async function (req, res, next) {
   try {
     const query = req.query;
     const result = await today_board_model.getList(query);
-    console.log("today_board result 40 : " , result);
-    console.log("------------------------");
     if (result && result.length > 0) {
       for (let i = 0; i < result.length; i++) {
         const imgResult = await today_board_img_model.getList({
           today_board_idx: result[i].today_board_idx,
         });
         console.log("imgResult47 :" , imgResult);
-        result[i].images = imgResult;
         result[i].repr_img = imgResult.length > 0 ? imgResult[0].img_path : "";
+        result[i].images = imgResult;
         const commentResult = await comment_model.getList({
           today_board_idx: result[i].today_board_idx,
         });
-        result[i].comments = commentResult;
         result[i].comment_cnt = commentResult.length;
+        result[i].comments = commentResult;
       }
     }
 
