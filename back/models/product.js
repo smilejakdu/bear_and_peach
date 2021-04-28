@@ -2,14 +2,18 @@ const { disable } = require("debug");
 const db = require("../components/db");
 
 module.exports.insert = async (connection, options) => {
-  console.log("options : ", options);
-  // let query = "INSERT INTO product SET ?";
-  // let values = options;
-  // return await db.query({
-  //   connection: connection,
-  //   query: query,
-  //   values: values,
-  // });
+  const {detail_info} = options;
+  delete options.detail_info;
+
+  const detail_info_string = JSON.stringify(detail_info);
+  options.detail_info = detail_info_string;
+
+  let query = "INSERT INTO product SET ?";
+  return await db.query({
+    connection: connection,
+    query: query,
+    values: options,
+  });
 };
 
 module.exports.update = async (connection, options) => {
