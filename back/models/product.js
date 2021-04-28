@@ -39,17 +39,15 @@ module.exports.delete = async (connection, options) => {
 module.exports.getList = async (options) => {
   console.log("options : ", options);
   try {
-    const { goods_idx } = options;
-    let query = `SELECT * FROM product
-                     LEFT JOIN brand ON goods.brand_idx = brand.brand_idx
-                     LEFT JOIN category ON goods.category_idx = category.category_idx
-                    `;
-    // query = `SELECT * FROM goods
-    //         `
+    const { product_idx } = options;
+    let query;
     let values;
-    if (goods_idx) {
-      query += " WHERE product_idx = ?";
-      values = goods_idx;
+
+    if (product_idx) {
+      query = "SELECT * FROM product WHERE product_idx = ?"
+      values = product_idx;
+    }else{
+      query ="SELECT product_idx , title , price FROM product"
     }
     return await db.query({
       // connection:connection,
@@ -58,5 +56,44 @@ module.exports.getList = async (options) => {
     });
   } catch (err) {
     throw new Error(err);
+  }
+};
+
+module.exports.getSubImgList = async (options)=>{
+  console.log("options 63 : " , options);
+  try{
+    const {product_idx} = options;
+    query = "SELECT * from product_sub_img WHERE product_idx = ?"
+
+    return await db.query({
+      // connection:connection,
+      query: query,
+      values: product_idx,
+    });
+
+  }catch(error){
+    throw new Error(error);
+  }
+}
+
+
+module.exports.multipleInsert = async (connection, options) => {
+  console.log("options66 : " ,options);
+
+  try {
+    let query = `INSERT INTO product_sub_img
+                                (
+                                   product_idx,
+                                   sub_image_path 
+                                ) 
+                    VALUES ?`
+
+    return await db.query({
+      connection: connection,
+      query: query,
+      values: [options]
+    });
+  } catch (e) {
+    throw new Error(e);
   }
 };
