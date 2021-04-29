@@ -36,8 +36,9 @@ module.exports.getList = async (options) => {
   let values
   let query
   if(options){
-    query = `SELECT * FROM cart
-                LEFT JOIN user ON user.user_idx = cart.user_idx WHERE user.user_idx = ?`;
+    query = `SELECT c.product_idx , c.cart_count , c.created_at , c.updated_at
+                FROM cart as c
+                LEFT JOIN user ON user.user_idx = c.user_idx WHERE user.user_idx = ?`;
     values = options
   }
   return await db.query({

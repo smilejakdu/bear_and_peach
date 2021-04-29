@@ -65,18 +65,19 @@ router.delete("/", async function (req, res, next) {
 
 router.get("/",verifyToken, async function (req, res, next) {
   const { user_idx } = req.decoded;
-  console.log("user_idx : " , user_idx);
   const result = await cart_model.getList(user_idx);
-  console.log("cart result70 : " , result);
-  const { product_idx }= result;
+
   for (let i = 0; i < result.length; i++) {
-    const imgResult = await product_model.getList({
+    const ProductResult = await product_model.getList({
       product_idx: result[i].product_idx,
     });
-    result[i].images = imgResult;
-    result[i].repr_img = imgResult.length > 0 ? imgResult[0].img_path : "";
+    const {main_image_path , title , price} =  ProductResult[0]
+    result[i].image = main_image_path;
+    result[i].title = title;
+    result[i].price = price;
   }
   res.status(200).json({ result });
 });
+
 
 module.exports = router;
