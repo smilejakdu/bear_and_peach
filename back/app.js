@@ -22,6 +22,7 @@ var myActiveRouter = require("./routes/my_active");
 var tokenRouter = require("./routes/token");
 var productRouter = require("./routes/product");
 var productImgRouter = require("./routes/product_img");
+var cartRouter = require("./routes/cart");
 
 var app = express();
 
@@ -90,6 +91,7 @@ app.use("/token" , tokenRouter);
 app.use("/today_board_likes", todayboardLikesRouter);
 app.use("/product", productRouter);
 app.use("/product_img", productImgRouter);
+app.use("/cart", cartRouter);
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
     next(createError(404));
