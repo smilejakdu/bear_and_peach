@@ -59,6 +59,28 @@ module.exports.getList = async (options) => {
   }
 };
 
+module.exports.getChartGetList = async (options) => {
+  console.log("options : ", options);
+  try {
+    const { product_idx } = options;
+    let query="";
+    let values;
+
+    if (product_idx) {
+      query = "SELECT * FROM product WHERE product_idx = ?";
+      values = product_idx;
+    } 
+
+    return await db.query({
+      // connection:connection,
+      query: query,
+      values: values,
+    });
+  } catch (err) {
+    throw new Error(err);
+  }
+};
+
 module.exports.getSubImgList = async (options)=>{
   console.log("options 63 : " , options);
   try{

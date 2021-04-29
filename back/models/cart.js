@@ -33,25 +33,16 @@ module.exports.delete = async (connection, options) => {
 
 module.exports.getList = async (options) => {
   console.log("options : ", options);
-  let query = `SELECT * FROM cart
-                 LEFT JOIN product ON product.product_idx = cart.product_idx
-    `;
-  let values = [];
-  const keys = Object.keys(options);
-  if (keys && keys.length > 0) {
-    for (let i = 0; i < keys.length; i++) {
-      if (i == 0) {
-        query += ` WHERE ${keys[i]} = ?`;
-        values.push(options[keys[i]]);
-      } else {
-        query += ` AND ${keys[i]} = ?`;
-        values.push(options[keys[i]]);
-      }
-    }
+  let values
+  let query
+  if(options){
+    query = `SELECT * FROM cart
+                LEFT JOIN user ON user.user_idx = cart.user_idx WHERE user.user_idx = ?`;
+    values = options
   }
   return await db.query({
     // connection:connection,
     query: query,
-    values: values,
+    values: options,
   });
 };

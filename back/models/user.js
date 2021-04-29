@@ -35,9 +35,9 @@ module.exports.delete = async (connection, options) => {
 module.exports.getList = async (options) => {
   const { user_idx, user_id } = options;
   let query = "SELECT * FROM user ";
-  // let query = 'SELECT * FROM user WHERE 1=1 '
   let values = [];
   let keys = Object.keys(options);
+
   if (user_idx) {
     query += " WHERE user_idx = ?";
     values.push(user_idx);
@@ -51,6 +51,23 @@ module.exports.getList = async (options) => {
       values.push(user_id);
     }
   }
+  return await db.query({
+    // connection:connection,
+    query: query,
+    values: values,
+  });
+};
+
+module.exports.getCartGetList = async (options) => {
+  const { user_idx } = options;
+  let query = ""
+  let values = [];
+
+  if (user_idx) {
+    query += "SELECT * FROM user WHERE user_idx = ?";
+    values.push(user_idx);
+  }
+
   return await db.query({
     // connection:connection,
     query: query,

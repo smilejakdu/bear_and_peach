@@ -35,11 +35,10 @@ router.get("/", async function (req, res, next) {
   try {
     const query = req.query;
     const result = await product_model.getList(query);
-
-    if(query && query.length > 0){
+    if(query && Object.keys(query).length > 0){
       result[0].detail_info = JSON.parse(result[0].detail_info);
       if(result && result.length > 0){
-        for (let i =0 ; i<result.length; i++){
+        for (let i =0 ; i < result.length; i++){
           const imgResult = await product_model.getSubImgList({product_idx : result[i].product_idx})
           console.log("imgResult44 :",imgResult);
           result[i].sub_img = imgResult
