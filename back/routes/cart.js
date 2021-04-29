@@ -66,7 +66,7 @@ router.delete("/", async function (req, res, next) {
 router.get("/",verifyToken, async function (req, res, next) {
   const { user_idx } = req.decoded;
   const result = await cart_model.getList(user_idx);
-
+  let total_price = 0 
   for (let i = 0; i < result.length; i++) {
     const ProductResult = await product_model.getList({
       product_idx: result[i].product_idx,
@@ -75,7 +75,10 @@ router.get("/",verifyToken, async function (req, res, next) {
     result[i].image = main_image_path;
     result[i].title = title;
     result[i].price = price;
+    const cart_price = price * result[i].cart_count
+    total_price += cart_price
   }
+  result.push({total_price:total_price})
   res.status(200).json({ result });
 });
 
