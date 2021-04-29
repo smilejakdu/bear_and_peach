@@ -22,12 +22,18 @@ module.exports.update = async (connection, options) => {
 };
 
 module.exports.delete = async (connection, options) => {
-  console.log("options : ", options.idx); // {idx :2, name:'ssdf'}
-  let query = "DELETE FROM cart WHERE cart_idx = ?";
+  console.log("options : ", options.cart_idx); 
+  const {cart_idx} = options;
+  let query = "DELETE FROM cart";
+  let values;
+  if(cart_idx){
+    query += ' WHERE cart_idx = ?'
+    values = cart_idx
+  }
   return await db.query({
     connection: connection,
     query: query,
-    values: options.cart_idx,
+    values: cart_idx,
   });
 };
 
@@ -36,7 +42,7 @@ module.exports.getList = async (options) => {
   let values
   let query
   if(options){
-    query = `SELECT c.product_idx , c.cart_count , c.created_at , c.updated_at
+    query = `SELECT c.product_idx , c.cart_idx , c.cart_count , c.created_at , c.updated_at
                 FROM cart as c
                 LEFT JOIN user ON user.user_idx = c.user_idx WHERE user.user_idx = ?`;
     values = options

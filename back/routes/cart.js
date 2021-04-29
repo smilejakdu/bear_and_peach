@@ -37,9 +37,10 @@ router.post("/",verifyToken, async function (req, res, next) {
   }
 });
 
-router.put("/", async function (req, res, next) {
+router.put("/",verifyToken, async function (req, res, next) {
   try {
     const json = req.body; // {idx :2, name:'ssdf'}
+    console.log("json : " , json);
     const connection = await db.beginTransaction();
     const result = await cart_model.update(connection, json);
     await db.commit(connection);
@@ -50,8 +51,10 @@ router.put("/", async function (req, res, next) {
   }
 });
 
-router.delete("/", async function (req, res, next) {
+
+router.delete("/",verifyToken, async function (req, res, next) {
   const json = req.body;
+  console.log("json : " , json);
   try {
     const connection = await db.beginTransaction();
     const result = await cart_model.delete(connection, { cart_idx: json.cart_idx });
