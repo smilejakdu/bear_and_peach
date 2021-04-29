@@ -104,13 +104,16 @@ router.get("/", verifyToken, async function (req, res, next) {
   }
 });
 
-// app.use("/user", usersRouter); // 127.0.0.1:3000/user
+// app.use("/user", usersRouter); // 127.0.0.1:4000/user/kakao
 router.get("/kakao", passport.authenticate("kakao"));
 router.get("/kakao/callback",passport.authenticate("kakao", {
   failureRedirect: "/",
   session: false
 }),(req, res) => {
-  res.send("user : " + JSON.stringify(req.user));
+  let newResult = req.user;
+  const token = jwt.sign({ user_idx: newResult[0].user_idx }, "jwt");
+  newResult[0].token = token;
+  res.status(200).json({ result: newResult });
   // res.redirect("/");
 });
 
