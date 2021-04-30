@@ -1,10 +1,12 @@
 import React from 'react'
-import {MypageBody} from "./Mypage.style"
+import {MypageBody , MypageBodyCenter} from "./Mypage.style"
 
 const Mypage=()=> {
     return (
         <MypageBody>
-           mypage 
+            <MypageBodyCenter>
+                mypage 
+            </MypageBodyCenter>
         </MypageBody>
     )
 }
