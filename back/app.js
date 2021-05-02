@@ -23,6 +23,7 @@ var tokenRouter = require("./routes/token");
 var productRouter = require("./routes/product");
 var productImgRouter = require("./routes/product_img");
 var cartRouter = require("./routes/cart");
+var orderRouter = require("./routes/orders");
 
 var app = express();
 
@@ -92,6 +93,7 @@ app.use("/today_board_likes", todayboardLikesRouter);
 app.use("/product", productRouter);
 app.use("/product_img", productImgRouter);
 app.use("/cart", cartRouter);
+app.use("/payment", orderRouter);
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
     next(createError(404));
