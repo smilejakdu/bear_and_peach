@@ -26,19 +26,8 @@ router.post("/",verifyToken, async function (req, res, next) {
     body.user_idx = user_idx;
 
     const result = await model.insert(connection, body);
-    // await db.commit(connection);
-    // res.json({ result });
-  } catch (err) {
-    console.log("err : ", err);
-    next(err);
-  }
-});
+    await payment_history_model.insert(connection , body);
 
-router.put("/", async function (req, res, next) {
-  try {
-    const json = req.body; // {idx :2, name:'ssdf'}
-    const connection = await db.beginTransaction();
-    const result = await model.update(connection, json);
     await db.commit(connection);
     res.json({ result });
   } catch (err) {
@@ -47,11 +36,16 @@ router.put("/", async function (req, res, next) {
   }
 });
 
-router.delete("/", async function (req, res, next) {
-  const json = req.body;
+router.delete("/",verifyToken, async function (req, res, next) {
+  const body = req.body;
+  const { user_idx } = req.decoded;
+  // body :  { product_idx: 34, order_idx: 2 }
+  body.user_idx = user_idx;
   try {
     const connection = await db.beginTransaction();
-    const result = await model.delete(connection, json);
+    const result = await model.delete(connection, body);
+    await payment_history_model.update(connection , body);
+
     await db.commit(connection);
     res.json({ result });
   } catch (err) {
@@ -60,7 +54,8 @@ router.delete("/", async function (req, res, next) {
   }
 });
 
-router.get("/", async function (req, res, next) {
+router.get("/",verifyToken, async function (req, res, next) {
+  const { user_idx } = req.decoded;
   try {
     const result = await model.getList(req.query);
     for (let i = 0; i < result.length; i++) {
