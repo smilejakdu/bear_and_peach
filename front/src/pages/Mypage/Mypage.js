@@ -5,7 +5,8 @@ import { useSelector, useDispatch } from 'react-redux';
 const Mypage = () => {
   const [payment_info , paymentInfo] = useState({});
   const dispatch = useDispatch();
-  function onClickPayment() {
+
+  const onClickPayment = () => {
     /* 1. 가맹점 식별하기 */
     const { IMP } = window;
     IMP.init('imp77526119');
@@ -28,14 +29,7 @@ const Mypage = () => {
     IMP.request_pay(data, callback);
   }
 
-  useEffect(() => {
-    axios.get(`/cart`)
-    .then((res) => {
-      console.log("res : " , res);
-    }).catch(error => {
-      console.log("error : " , error);
-    })
-  },[])
+
   // apply_num: '';
   // bank_name: null;
   // buyer_addr: '신사동 661-16';
@@ -62,18 +56,10 @@ const Mypage = () => {
   // success: true;
 
   /* 3. 콜백 함수 정의하기 */
-  function callback(response) {
-    const {
-      success,
-      merchant_uid,
-      error_msg,
-    } = response;
-    console.log("response : " , response);
-    if (success) {
-      alert('결제 성공');
-    } else {
-      alert(`결제 실패: ${error_msg}`);
-    }
+  const callback = (res) => {
+    const { success , merchant_uid , error_msg } = res;
+    console.log("response : " , res);
+    return success ? '성공' : `결제 실패 : ${error_msg}`;
   }
 
     return (

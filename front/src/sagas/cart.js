@@ -11,9 +11,7 @@ function* loadCarts(action) {
     const result = yield call(loadCartsAPI , action.data);
     console.log("result : " , result);
     // yield delay(1000);
-    const {
-      data: { cart_content },
-    } = result;
+    const {data: { cart_content }} = result;
     yield put({
       type: LOAD_CARTS_SUCCESS,
       data: cart_content,

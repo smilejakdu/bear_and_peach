@@ -51,10 +51,7 @@ export const UPDATE_COMMENT_REQUEST = "UPDATE_COMMENT_REQUEST";
 export const UPDATE_COMMENT_SUCCESS = "UPDATE_COMMENT_SUCCESS";
 export const UPDATE_COMMENT_FAILURE = "UPDATE_COMMENT_FAILURE";
 
-export const addComment = (data)=>({
-    type: ADD_COMMENT_REQUEST,
-    data,
-});
+export const addComment = (data)=>({type: ADD_COMMENT_REQUEST,data});
 
 const reducer = (state = initialState, action) =>
   produce(state, (draft) => {
