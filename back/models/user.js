@@ -3,13 +3,13 @@ const db = require("../components/db");
 
 module.exports.insert = async (connection, options) => {
   console.log("options : ", options);
-  let query = "INSERT INTO user SET ?";
-  let values = options;
-  return await db.query({
-    connection: connection,
-    query: query,
-    values: values,
-  });
+  // let query = "INSERT INTO user SET ?";
+  // let values = options;
+  // return await db.query({
+  //   connection: connection,
+  //   query: query,
+  //   values: values,
+  // });
 };
 
 module.exports.update = async (connection, options) => {
@@ -33,23 +33,13 @@ module.exports.delete = async (connection, options) => {
 };
 
 module.exports.getList = async (options) => {
-  const { user_idx, user_id } = options;
-  let query = "SELECT * FROM user ";
-  let values = [];
-  let keys = Object.keys(options);
+  const { user_idx } = options;
+  let query = "SELECT user_idx , nickname FROM user ";
+  let values
 
   if (user_idx) {
     query += " WHERE user_idx = ?";
-    values.push(user_idx);
-  }
-  if (user_id) {
-    if (keys.length == 1) {
-      query += " WHERE user_id = ?";
-      values.push(user_id);
-    } else {
-      query += " AND user_id = ?";
-      values.push(user_id);
-    }
+    values = user_idx;
   }
   return await db.query({
     // connection:connection,

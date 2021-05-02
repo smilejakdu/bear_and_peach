@@ -17,38 +17,34 @@ module.exports.update = async (connection, options) => {
   return await db.query({
     connection: connection,
     query: query,
-    values: [options, options.payment_idx],
+    values: [options, options.orders_idx],
   });
 };
 
 module.exports.delete = async (connection, options) => {
-  console.log("options : ", options.idx); // {idx :2, name:'ssdf'}
+  console.log("options : ", options.idx);
   let query = "DELETE FROM orders WHERE orders_idx = ?";
   return await db.query({
     connection: connection,
     query: query,
-    values: options.payment_idx,
+    values: options.orders_idx,
   });
 };
 
 module.exports.getList = async (options) => {
-  console.log("options : ", options);
-  let query = `SELECT payment.*, orders.goods_idx, user.user_idx FROM payment
-                LEFT JOIN orders ON orders.orders_idx = payment.orders_idx
-                LEFT JOIN goods ON goods.goods_idx = orders.goods_idx
-                LEFT JOIN user ON user.user_idx = orders.user_idx
-                `;
+  // console.log('options : ',options)
+  let query = `SELECT * FROM orders
+                 LEFT JOIN product ON product.product_idx = orders.product_idx`;
   let values = [];
   const keys = Object.keys(options);
   if (keys && keys.length > 0) {
     for (let i = 0; i < keys.length; i++) {
-      values.push(options[keys[i]]);
-      keys[i] == "orders_idx" ? (keys[i] = "payment.orders_idx") : keys[i];
-      keys[i] == "user_idx" ? (keys[i] = "user.user_idx") : keys[i];
       if (i == 0) {
         query += ` WHERE ${keys[i]} = ?`;
+        values.push(options[keys[i]]);
       } else {
         query += ` AND ${keys[i]} = ?`;
+        values.push(options[keys[i]]);
       }
     }
   }
