@@ -12,7 +12,7 @@ const util = require("../components/util");
 router.post("/",verifyToken, async function (req, res, next) {
   const body = req.body;
   const {user_idx} = req.decoded;
-  // body :  { product_idx: 34, amount: 2 }
+  // user_idx , 
   try {
     const connection = await db.beginTransaction();
     const productResult = await product_model.getList({ product_idx: body.product_idx });

@@ -24,7 +24,6 @@ var productRouter = require("./routes/product");
 var productImgRouter = require("./routes/product_img");
 var cartRouter = require("./routes/cart");
 var orderRouter = require("./routes/orders");
-
 var app = express();
 
 const swaggerDefinition = {
@@ -33,7 +32,7 @@ const swaggerDefinition = {
         version: "1.0.0",
         description: "API description",
     },
-    host: "localhost:3000",
+    host: "localhost:4000",
     basePath: "/",
     securityDefinitions: {
         bearerAuth: {
