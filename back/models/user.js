@@ -34,7 +34,7 @@ module.exports.delete = async (connection, options) => {
 
 module.exports.getList = async (options) => {
   const { user_idx } = options;
-  let query = "SELECT user_idx , nickname FROM user ";
+  let query = "SELECT * FROM user ";
   let values
 
   if (user_idx) {

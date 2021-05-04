@@ -7,13 +7,10 @@
  *     name: Get user
  *     summary: Get user
  *     parameters:
- *       - in: query
- *         name: user_idx
+ *       - in: header
+ *         name: Authentication
  *         schema:           
- *           type: object
- *           properties:
- *             name: 
- *               type: number
+ *           type: string
  *     responses:
  *       '200':
  *         description: Get User
@@ -30,11 +27,11 @@
  *     produces:
  *       - application/json
  *     parameters:
- *       - name: user_id
+ *       - name: nickname
  *         in: formData
  *         required: true
  *         type: string
- *       - name: user_pwd
+ *       - name: password
  *         in: formData
  *         required: true
  *         type: string     
@@ -44,7 +41,7 @@
  *       '404':
  *         fail
  * 
- * /user/signUp: 
+ * /user/signup: 
  *   post:
  *     tags:
  *       - Users
@@ -100,5 +97,4 @@
  *       '404':
  *         fail
  * 
- 
  */
