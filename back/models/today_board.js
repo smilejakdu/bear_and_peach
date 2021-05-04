@@ -11,24 +11,30 @@ module.exports.insert = async (connection, options) => {
     values: values,
   });
 };
+//  console.log("options : ", options);
+//  const { detail_info } = options;
+//  delete options.detail_info;
+
+//  const detail_info_string = JSON.stringify(detail_info);
+//  options.detail_info = detail_info_string;
 
 module.exports.update = async (connection, options) => {
   console.log("options : ", options); // {idx :2, name:'ssdf'}
-  let query = "UPDATE today_board SET ? WHERE today_board_idx = ?";
-  return await db.query({
-    connection: connection,
-    query: query,
-    values: [options, options.goods_idx],
-  });
+  // let query = "UPDATE today_board SET ? WHERE today_board_idx = ?";
+  // return await db.query({
+  //   connection: connection,
+  //   query: query,
+  //   values: [options, options.today_board_idx],
+  // });
 };
 
 module.exports.delete = async (connection, options) => {
-  console.log("options : ", options.idx); // {idx :2, name:'ssdf'}
+  console.log("options : ", options.today_board_idx); // {idx :2, name:'ssdf'}
   let query = "DELETE FROM today_board WHERE today_board_idx = ?";
   return await db.query({
     connection: connection,
     query: query,
-    values: options.goods_idx,
+    values: options.today_board_idx,
   });
 };
 

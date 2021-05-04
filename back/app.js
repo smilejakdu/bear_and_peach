@@ -28,7 +28,7 @@ var app = express();
 
 const swaggerDefinition = {
     info: {
-        title: "Node 3th Server API",
+        title: "Bear_And_Peach_Swagger",
         version: "1.0.0",
         description: "API description",
     },

@@ -57,8 +57,27 @@
  *
  *     responses:
  *       '200':
- *         description: Register goods
+ *         description: Register today_board
  *       '404':
  *         fail
  *
+ *   delete:
+ *     tags:
+ *       - TodayBoard
+ *     name: Delete TodayBoard
+ *     summary: Delete TodayBoard
+ *     desciption: Delete TodayBoard 
+ *     produces:
+ *       - application/json
+ *     parameters:
+ *       - name: today_board_idx
+ *         in: formData
+ *         required: true
+ *         type: string
+ *     
+ *     responses:
+ *       '200':
+ *         description: Successfully delete Product 
+ *       '404':
+ *         fail
  */
