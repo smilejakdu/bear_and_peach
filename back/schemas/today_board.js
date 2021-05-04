@@ -33,31 +33,26 @@
  *         in: body
  *         schema:
  *           properties:
- *             main_image_path:
+ *             kakao_character_image_path:
  *               type: string
- *             title:
+ *             kakao_character_name:
  *               type: string
- *             price:
+ *             like_counts:
  *               type: integer
- *             sub_image_path:
- *               type: array
- *               items:
- *                 type: string
- *             detail_info:
+ *             content_body:
+ *               type: string
+ *             images:
  *               type: array
  *               items:
  *                 type: string
  *           example:
- *             main_image_path: main_image_path
- *             title: title
- *             price : 3000
- *             sub_image_path : [
- *               "sub_image_path1",
- *               "sub_image_path2"
- *             ]
- *             detail_info : [
- *               "detail_info1",
- *               "detail_info2"
+ *             kakao_character_image_path: "kakao_character_image_path"
+ *             kakao_character_name: "kakao_character_name"
+ *             like_counts : 3
+ *             content_body : "content_body_test"
+ *             image : [
+ *               "image_test1",
+ *               "image_test2"
  *             ]
  *
  *     responses:
