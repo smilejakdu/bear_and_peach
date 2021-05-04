@@ -14,20 +14,20 @@ module.exports.insert = async (connection, options) => {
 
 module.exports.update = async (connection, options) => {
   console.log("options : ", options); // {idx :2, name:'ssdf'}
-  let query = "UPDATE today_board_img SET ? WHERE idx = ?";
+  let query = "UPDATE today_board_img SET ? WHERE today_board_img_idx = ?";
   return await db.query({
     connection: connection,
     query: query,
-    values: [options, options.goods_img_idx],
+    values: [options, options.today_board_img_idx],
   });
 };
 
 module.exports.delete = async (connection, options) => {
   console.log("options : ", options.idx); // {idx :2, name:'ssdf'}
-  let query = "DELETE FROM today_board_img WHERE idx = ?";
+  let query = "DELETE FROM today_board_img WHERE today_board_img_idx = ?";
 
   if (idx_array) {
-    whereClause += ` AND idx IN (?)`;
+    whereClause += ` AND today_board_img_idx IN (?)`;
     values.push(idx_array);
   }
 
@@ -98,3 +98,46 @@ module.exports.multipleInsert = async (options, connection) => {
     throw new Error(e);
   }
 };
+
+
+module.exports.multipleUpdate = async (connection, options) => {
+//  options: [
+//    {
+//      today_board_idx: 15,
+//      img_path: "images/board/2021-04-1417:24:18/content_test1.png",
+//    },
+//    {
+//      today_board_idx: 15,
+//      img_path: "images/board/2021-04-1417:24:30/content_test3.png",
+//    },
+//  ];
+        console.log('options : ',options)
+        let sql = `UPDATE today_board_img SET`                      
+        for (let i=0;i<options.length;i++){
+            let value = options[i]
+            console.log("value 118 : " , value);
+            if(i == options.length-1){
+                sql += ` img_path = CASE today_board_idx 
+                                WHEN ${value.today_board_idx} 
+                                THEN '${value.img_path}' 
+                                ELSE img_path 
+                                END
+                                `    
+            } else {
+                sql += ` img_path = 
+                                CASE today_board_idx 
+                                WHEN ${value.today_board_idx} 
+                                THEN '${value.img_path}' 
+                                ELSE img_path 
+                                END
+                                `;    
+            }            
+        }
+        console.log('sql : ',sql)
+        const { affectedRows } = await db.query({
+            connection: connection,
+            query: sql,
+            values: [options]
+        })
+        return affectedRows
+}

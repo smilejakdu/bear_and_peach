@@ -20,12 +20,12 @@ module.exports.insert = async (connection, options) => {
 
 module.exports.update = async (connection, options) => {
   console.log("options : ", options); // {idx :2, name:'ssdf'}
-  // let query = "UPDATE today_board SET ? WHERE today_board_idx = ?";
-  // return await db.query({
-  //   connection: connection,
-  //   query: query,
-  //   values: [options, options.today_board_idx],
-  // });
+  let query = "UPDATE today_board SET ? WHERE today_board_idx = ?";
+  return await db.query({
+    connection: connection,
+    query: query,
+    values: [options, options.today_board_idx],
+  });
 };
 
 module.exports.delete = async (connection, options) => {
