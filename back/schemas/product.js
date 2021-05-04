@@ -1,6 +1,6 @@
 /**
  * @swagger
- * /product: 
+ * /product:
  *   get:
  *     tags:
  *       - Product
@@ -9,17 +9,17 @@
  *     parameters:
  *       - in: query
  *         name: product_idx
- *         schema:           
+ *         schema:
  *           type: object
  *           properties:
- *             name: 
+ *             name:
  *               type: number
  *     responses:
  *       '200':
  *         description: Get Product
  *       '404':
  *         fail
- *  
+ *
  *   post:
  *     tags:
  *       - Product
@@ -31,34 +31,39 @@
  *     parameters:
  *       - name: body
  *         in: body
- *         schema:  
+ *         schema:
  *           properties:
- *             goods_name:
+ *             main_image_path:
  *               type: string
- *             goods_price: 
+ *             title:
+ *               type: string
+ *             price:
  *               type: integer
- *             images:
+ *             sub_image_path:
  *               type: array
  *               items:
  *                 type: string
- *             brand_idx:
- *               type: number
- *             category_idx:
- *               type: integer
+ *             detail_info:
+ *               type: array
+ *               items:
+ *                 type: string
  *           example:
- *             goods_name: sctest1
- *             goods_price : 3000
- *             images : [
- *               "images/users/2021-02-0512:17:21/광고2.png",
- *               "images/users/2021-02-0512:17:21/광고2.png"
+ *             main_image_path: main_image_path
+ *             title: title
+ *             price : 3000
+ *             sub_image_path : [
+ *               "sub_image_path1",
+ *               "sub_image_path2"
  *             ]
- *             brand_idx : 1
- *             category_idx : 1
- *     
+ *             detail_info : [
+ *               "detail_info1",
+ *               "detail_info2"
+ *             ]
+ *
  *     responses:
  *       '200':
  *         description: Register goods
  *       '404':
  *         fail
- * 
+ *
  */
