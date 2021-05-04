@@ -2,6 +2,7 @@ const { disable } = require("debug");
 const db = require("../components/db");
 
 module.exports.insert = async (connection, options) => {
+  console.log("options : " , options);
   const {detail_info} = options;
   delete options.detail_info;
 
@@ -17,12 +18,18 @@ module.exports.insert = async (connection, options) => {
 };
 
 module.exports.update = async (connection, options) => {
-  console.log("options : ", options); // {idx :2, name:'ssdf'}
+  console.log("options21 : ", options); // {idx :2, name:'ssdf'}
+  const {detail_info} = options;
+  delete options.detail_info;
+
+  const detail_info_string = JSON.stringify(detail_info);
+  options.detail_info= detail_info_string;
+
   let query = "UPDATE product SET ? WHERE product_idx = ?";
   return await db.query({
     connection: connection,
     query: query,
-    values: [options, options.goods_idx],
+    values: [options, options.product_idx],
   });
 };
 
@@ -32,7 +39,7 @@ module.exports.delete = async (connection, options) => {
   return await db.query({
     connection: connection,
     query: query,
-    values: options.goods_idx,
+    values: options.product_idx,
   });
 };
 
@@ -118,4 +125,28 @@ module.exports.multipleInsert = async (connection, options) => {
   } catch (e) {
     throw new Error(e);
   }
+};
+
+
+module.exports.multipleUpdate = async (connection, options) => {
+  console.log("options132 : ", options);
+  let sql = `UPDATE product_sub_img SET`
+  let list = options.list;
+  console.log("list_update 135 : " , list);
+  // try {
+  //   let query = `UPDATE INTO product_sub_img
+  //                               (
+  //                                  product_idx,
+  //                                  sub_image_path 
+  //                               ) 
+  //                   VALUES ?`;
+
+  //   return await db.query({
+  //     connection: connection,
+  //     query: query,
+  //     values: [options],
+  //   });
+  // } catch (e) {
+  //   throw new Error(e);
+  // }
 };
