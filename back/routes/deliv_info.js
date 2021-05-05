@@ -36,11 +36,10 @@ router.put("/",verifyToken, async function (req, res, next) {
 });
 
 router.delete("/",verifyToken, async function (req, res, next) {
-  const json = req.body;
-  const { user_idx } = req.decoded;
+  const body = req.body;
   try {
     const connection = await db.beginTransaction();
-    const result = await model.delete(connection, { idx: json.idx });
+    const result = await model.delete(connection, { deliv_info_idx: body.deliv_info_idx });
     await db.commit(connection);
     res.json({ result });
   } catch (err) {

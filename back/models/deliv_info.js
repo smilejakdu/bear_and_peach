@@ -22,7 +22,7 @@ module.exports.update = async (connection, options) => {
 };
 
 module.exports.delete = async (connection, options) => {
-  console.log("options : ", options.idx); // {idx :2, name:'ssdf'}
+  console.log("options : ", options.deliv_info_idx);
   let query = "DELETE FROM deliv_info WHERE deliv_info_idx = ?";
   return await db.query({
     connection: connection,
