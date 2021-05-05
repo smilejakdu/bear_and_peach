@@ -37,7 +37,7 @@ module.exports.getList = async (options) => {
   let query = "SELECT * FROM deliv_info";
   let values;
   if (user_idx) {
-    query += " WHERE user_id = ?";
+    query += " WHERE user_idx = ?";
     values = user_idx;
   }
   return await db.query({
@@ -47,65 +47,4 @@ module.exports.getList = async (options) => {
   });
 };
 
-module.exports.multipleUpdate = async (connection, options) => {
-  console.log("options : ", options);
-  let sql = `UPDATE deliv_info SET`;
-  let list = options.list;
-  for (let i = 0; i < list.length; i++) {
-    let value = list[i];
-    if (i == list.length - 1) {
-      sql += ` base_address = CASE deliv_info_idx 
-                                WHEN ${value.deliv_info_idx} 
-                                THEN '${value.base_address}' 
-                                ELSE base_address 
-                                END,
-                                detail_address = CASE deliv_info_idx
-                                WHEN ${value.deliv_info_idx} 
-                                THEN '${value.detail_address}'
-                                ELSE detail_address
-                                END,
-                                zipcode = CASE deliv_info_idx
-                                WHEN ${value.deliv_info_idx} 
-                                THEN '${value.zipcode}'
-                                ELSE zipcode
-                                END
-                                `;
-    } else {
-      sql += ` base_address = 
-                                CASE deliv_info_idx 
-                                WHEN ${value.deliv_info_idx} 
-                                THEN '${value.base_address}' 
-                                ELSE base_address 
-                                END,
-                        detail_address = 
-                                CASE deliv_info_idx
-                                WHEN ${value.deliv_info_idx} 
-                                THEN '${value.detail_address}'
-                                ELSE detail_address
-                                END,
-                                zipcode = CASE deliv_info_idx
-                                WHEN ${value.deliv_info_idx} 
-                                THEN '${value.zipcode}'
-                                ELSE zipcode
-                                END,
-                                `;
-    }
-  }
-  console.log("sql : ", sql);
-  const { affectedRows } = await db.query({
-    connection: connection,
-    query: sql,
-    values: [options],
-  });
-  return affectedRows;
-};
 
-module.exports.multipleDelete = async (connection, options) => {
-  console.log("options : ", options.idx_array);
-  let query = `DELETE FROM deliv_info WHERE deliv_info_idx IN (?)`;
-  return await db.query({
-    connection,
-    query: query,
-    values: [options.idx_array],
-  });
-};
