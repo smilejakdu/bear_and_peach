@@ -39,7 +39,7 @@ module.exports.delete = async (connection, options) => {
 };
 
 module.exports.getList = async (options) => {
-  console.log("options : ", options);
+  console.log("options42 : ", options);
   try {
     const { comment_idx, today_board_idx, user_idx } = options;
     let query = "SELECT * FROM comment";
