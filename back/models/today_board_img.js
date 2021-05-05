@@ -101,43 +101,32 @@ module.exports.multipleInsert = async (options, connection) => {
 
 
 module.exports.multipleUpdate = async (connection, options) => {
-//  options: [
-//    {
-//      today_board_idx: 15,
-//      img_path: "images/board/2021-04-1417:24:18/content_test1.png",
-//    },
-//    {
-//      today_board_idx: 15,
-//      img_path: "images/board/2021-04-1417:24:30/content_test3.png",
-//    },
-//  ];
-        console.log('options : ',options)
-        let sql = `UPDATE today_board_img SET`                      
-        for (let i=0;i<options.length;i++){
-            let value = options[i]
-            console.log("value 118 : " , value);
-            if(i == options.length-1){
-                sql += ` img_path = CASE today_board_idx 
-                                WHEN ${value.today_board_idx} 
-                                THEN '${value.img_path}' 
-                                ELSE img_path 
-                                END
-                                `    
-            } else {
-                sql += ` img_path = 
-                                CASE today_board_idx 
-                                WHEN ${value.today_board_idx} 
-                                THEN '${value.img_path}' 
-                                ELSE img_path 
-                                END
-                                `;    
-            }            
-        }
-        console.log('sql : ',sql)
-        const { affectedRows } = await db.query({
-            connection: connection,
-            query: sql,
-            values: [options]
-        })
-        return affectedRows
+    console.log('options : ',options)
+    let sql = `UPDATE today_board_img SET`                      
+    for (let i=0;i<options.length;i++){
+        let value = options[i]
+        console.log("value 118 : " , value);
+        if(i == options.length-1){
+            sql += ` img_path = CASE today_board_idx
+                          WHEN ${value.today_board_idx} 
+                          THEN '${value.img_path}' 
+                          ELSE img_path 
+                          END
+                          `    
+        } else {
+            sql += ` img_path = CASE today_board_idx
+                          WHEN ${value.today_board_idx} 
+                          THEN '${value.img_path}' 
+                          ELSE img_path 
+                          END,
+                          `  
+        }            
+    }
+    console.log('sql 135: ',sql)
+    const { affectedRows } = await db.query({
+        connection: connection,
+        query: sql,
+        values: [options]
+    })
+    return affectedRows
 }

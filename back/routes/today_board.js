@@ -59,13 +59,6 @@ router.get("/", async function (req, res, next) {
     next(err);
   }
 });
-// {
-//     "kakao_character_image_path":"images/kakao/2021-04-1417:21:49/bear.png",
-//     "kakao_character_name":"죠르디",
-//     "like_counts":3,
-//     "content_body":"오늘은 목요일... 그래도 좀 쌀쌀하네_update",
-//     "images":["images/board/2021-04-1417:24:18/content_test1.png","images/board/2021-04-1417:24:30/content_test2.png"]
-// }
 
 router.put("/", async function (req, res, next) {
   const body = req.body; // {name:asdf,price:200}
@@ -85,8 +78,8 @@ router.put("/", async function (req, res, next) {
     }
     await today_board_img_model.multipleUpdate(connection, imagesArray);
 
-    // await db.commit(connection);
-    // res.json({ result });
+    await db.commit(connection);
+    res.json({ result });
   } catch (err) {
     console.log("err : ", err);
     next(err);
