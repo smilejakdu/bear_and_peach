@@ -94,7 +94,6 @@ module.exports.multipleInsert = async (options, connection) => {
       values: [options],
     });
   } catch (e) {
-    console.log('e????',e)
     throw new Error(e);
   }
 };
@@ -105,7 +104,6 @@ module.exports.multipleUpdate = async (connection, options) => {
     let sql = `UPDATE today_board_img SET`                      
     for (let i=0;i<options.length;i++){
         let value = options[i]
-        console.log("value 118 : " , value);
         if(i == options.length-1){
             sql += ` img_path = CASE today_board_idx
                           WHEN ${value.today_board_idx} 

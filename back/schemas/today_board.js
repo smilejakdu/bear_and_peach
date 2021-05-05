@@ -61,6 +61,51 @@
  *       '404':
  *         fail
  *
+ *   put:
+ *     tags:
+ *       - TodayBoard
+ *     name: Update TodayBoard
+ *     summary: Update TodayBoard
+ *     desciption: Update TodayBoard
+ *     produces:
+ *       - application/json
+ *     parameters:
+ *       - name: body
+ *         in: body
+ *         schema:
+ *           properties:
+ *             today_board_idx:
+ *               type: integer
+ *             kakao_character_image_path:
+ *               type: string
+ *             kakao_character_name:
+ *               type: string
+ *             title:
+ *               type: string
+ *             content:
+ *               type: string
+ *             detail_info:
+ *               type: array
+ *               items:
+ *                 type: string
+ *           example:
+ *             today_board_idx : 15
+ *             kakao_character_image_path: "kakao_character_image_path"
+ *             kakao_character_name: "kakao_character_name"
+ *             title : "title"
+ *             content : "content"
+ *             images : [
+ *               "images1",
+ *               "images2"
+ *             ]
+ *
+ *     responses:
+ *       '200':
+ *         description: Register goods
+ *       '404':
+ *         fail
+ * 
+ * 
  *   delete:
  *     tags:
  *       - TodayBoard
