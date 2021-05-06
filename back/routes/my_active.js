@@ -56,7 +56,7 @@ router.delete("/", verifyToken, async function (req, res, next) {
   } = req.body;
 
   try{
-    if(comment_idx && table){
+    if(today_board_likes_idx && today_board_likes_idx.length > 0){
       // 게시물 좋아요 삭제
       const connection = await db.beginTransaction();
       const result = await today_board_likes_model.delete({
