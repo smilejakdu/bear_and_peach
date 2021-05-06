@@ -18,16 +18,13 @@
  *         in: body
  *         schema:
  *           properties:
- *             base_address:
- *               type: string
- *             detail_address:
- *               type: string
- *             zipcode:
- *               type: string
+ *             product_idx:
+ *               type: integer
+ *             cart_count:
+ *               type: integer
  *           example:
- *             base_address: "base_address"
- *             detail_address: "detail_address"
- *             zipcode : "112"
+ *             product_idx: 35
+ *             cart_count: 3
  *
  *     responses:
  *       '200':
@@ -67,19 +64,13 @@
  *         in: body
  *         schema:
  *           properties:
- *             deliv_info_idx:
+ *             cart_idx:
  *               type: integer
- *             base_address:
- *               type: string
- *             detail_address:
- *               type: string
- *             zipcode:
- *               type: string
+ *             cart_count:
+ *               type: integer
  *           example:
- *             deliv_info_idx : 1
- *             base_address: "base_address"
- *             detail_address: "detail_address"
- *             zipcode : "112"
+ *             cart_idx : 3
+ *             cart_count: 2
  *
  *     responses:
  *       '200':
@@ -100,10 +91,10 @@
  *         name: Authentication
  *         schema:
  *           type: string
- *       - name: deliv_info_idx
+ *       - name: cart_idx
  *         in: formData
  *         required: true
- *         type: string
+ *         type: integer
  *
  *     responses:
  *       '200':
