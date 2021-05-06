@@ -11,7 +11,7 @@ module.exports.insert = async (connection, options) => {
   });
 };
 
-module.exports.delete = async (connection, options) => {
+module.exports.delete = async (options) => {
   console.log("options : ", options); // {idx :2, name:'ssdf'}
   let query = "DELETE FROM today_board_likes";
   let values = [];

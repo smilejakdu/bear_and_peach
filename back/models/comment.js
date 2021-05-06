@@ -75,14 +75,10 @@ module.exports.getMyActiveContentList = async (options) => {
   console.log("comment_content_options : ", options);
   try {
     const { user_idx } = options;
-    // let query = "SELECT * FROM comment";
-    let query = `SELECT comment.created_at , comment.today_board_idx , comment.comment_idx FROM comment 
-                JOIN user on user.user_idx = comment.user_idx
-                JOIN today_board as tb on tb.today_board_idx = comment.today_board_idx
-                  `;
+    let query = "SELECT comment_idx,today_board_idx,user_idx FROM comment";
     let values;
     if (user_idx) {
-      query += " WHERE user.user_idx = ?";
+      query += " WHERE user_idx = ?";
       values = user_idx;
       return await db.query({
         query: query,

@@ -4,7 +4,7 @@ const { verifyToken } = require("./middlewares");
 const db = require("../components/db");
 const today_board_likes_model = require("../models/today_board_likes");
 
-router.post("/", async function (req, res, next) {
+router.post("/",verifyToken, async function (req, res, next) {
   const body = req.body;
   console.log("body : ", body);
   try {
@@ -21,11 +21,11 @@ router.post("/", async function (req, res, next) {
 // verifyToken 를 추가해줘서 today_board_idx 와 user_idx 를
 // 나중엔 query WHERE 에 넣어줘야한다. 지금은 일단 
 // today_board_idx , user_idx 를 그냥 body 로 넘겨주자.
-router.delete("/", async function (req, res, next) {
-  const json = req.body;
+router.delete("/",verifyToken, async function (req, res, next) {
+  const body = req.body;
   try {
     const connection = await db.beginTransaction();
-    const result = await today_board_likes_model.delete(connection, json);
+    const result = await today_board_likes_model.delete(body);
     await db.commit(connection);
     res.json({ result });
   } catch (err) {
@@ -34,7 +34,7 @@ router.delete("/", async function (req, res, next) {
   }
 });
 
-router.get("/", async function (req, res, next) {
+router.get("/",verifyToken, async function (req, res, next) {
   console.log(req.query);
   const result = await today_board_likes_model.getList(req.query);
   res.status(200).json({ result });

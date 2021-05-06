@@ -29,7 +29,7 @@ module.exports.update = async (connection, options) => {
 };
 
 module.exports.delete = async (connection, options) => {
-  console.log("options : ", options.idx); // {idx :2, name:'ssdf'}
+  console.log("options : ", options.comment_idx);
   let query = "DELETE FROM my_active WHERE comment_idx = ?";
   return await db.query({
     connection: connection,

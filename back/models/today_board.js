@@ -1,4 +1,3 @@
-const { disable } = require("debug");
 const db = require("../components/db");
 
 module.exports.insert = async (connection, options) => {
@@ -11,12 +10,6 @@ module.exports.insert = async (connection, options) => {
     values: values,
   });
 };
-//  console.log("options : ", options);
-//  const { detail_info } = options;
-//  delete options.detail_info;
-
-//  const detail_info_string = JSON.stringify(detail_info);
-//  options.detail_info = detail_info_string;
 
 module.exports.update = async (connection, options) => {
   console.log("options : ", options); // {idx :2, name:'ssdf'}
@@ -80,10 +73,10 @@ module.exports.getMyActiveList = async (options) => {
     const { user_idx } = options;
     console.log("user_idx : ", user_idx);
     // let query = "SELECT * FROM my_active";
-    let query = `SELECT tb.title ,tdu.created_at , tb.today_board_idx , user.user_idx
-                FROM likes as tdu
-                JOIN user on user.user_idx = tdu.user_idx
-                JOIN today_board as tb on tb.today_board_idx = tdu.today_board_idx `;
+    let query = `SELECT tb.title , tbl.today_board_likes_idx , tbl.created_at , tb.today_board_idx , user.user_idx 
+                FROM today_board_likes as tbl
+                JOIN user on user.user_idx = tbl.user_idx
+                JOIN today_board as tb on tb.today_board_idx = tbl.today_board_idx `;
     let values;
     if (user_idx) {
       query += " WHERE user.user_idx = ?";
