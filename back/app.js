@@ -32,7 +32,7 @@ const swaggerDefinition = {
     version: "1.0.0",
     description: "API description",
   },
-  host: "http://3.35.131.149",
+  host: "3.35.131.149",
   //   host: "localhost:4000",
   basePath: "/",
   securityDefinitions: {
