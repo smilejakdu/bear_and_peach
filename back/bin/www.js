@@ -12,8 +12,8 @@ var http = require('http');
  * Get port from environment and store in Express.
  */
 
-var port = normalizePort(process.env.PORT || '4000'); // local
-// var port = normalizePort(process.env.PORT || "80"); // aws
+// var port = normalizePort(process.env.PORT || '4000'); // local
+var port = normalizePort(process.env.PORT || "80"); // aws
 console.log("port16 : " , port);
 app.set('port', port);
 
