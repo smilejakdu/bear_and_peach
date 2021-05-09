@@ -27,21 +27,22 @@ var orderRouter = require("./routes/orders");
 var app = express();
 
 const swaggerDefinition = {
-    info: {
-        title: "Bear_And_Peach_Swagger",
-        version: "1.0.0",
-        description: "API description",
+  info: {
+    title: "Bear_And_Peach_Swagger",
+    version: "1.0.0",
+    description: "API description",
+  },
+  host: "http://3.35.131.149",
+  //   host: "localhost:4000",
+  basePath: "/",
+  securityDefinitions: {
+    bearerAuth: {
+      type: "apiKey",
+      name: "Authorization",
+      schema: "bearer",
+      in: "header",
     },
-    host: "localhost:4000",
-    basePath: "/",
-    securityDefinitions: {
-        bearerAuth: {
-            type: "apiKey",
-            name: "Authorization",
-            schema: "bearer",
-            in: "header",
-        },
-    },
+  },
 };
 
 const options = {
