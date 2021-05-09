@@ -6,9 +6,16 @@ https://store.kakaofriends.com/kr/index
 - 기간 : 21.04.01 ~ ( ing )
 - 구성 : 1명
 
-# Demo
+# Demo Swagger
 
-준비중..
+localst : http://localhost:4000/api-docs/#/
+
+server : http://3.35.131.149/api-docs/#/
+// 마트다운 형식
+
+![modeling](/public/image/modeling.PNG)
+
+![swagger](./public/image/swagger.PNG)
 
 # DB modeling 
 
