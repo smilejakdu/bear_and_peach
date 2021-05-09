@@ -14,7 +14,7 @@ server : http://3.35.131.149/api-docs/#/
 // 마트다운 형식
 
 
-![swagger](https://github.com/smilejakdu/bear_and_peach/blob/main/back/public/images/modeling.png)
+![swagger](https://github.com/smilejakdu/bear_and_peach/blob/main/back/public/images/swagger.png)
 
 # DB modeling 
 
