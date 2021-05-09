@@ -13,11 +13,12 @@ localst : http://localhost:4000/api-docs/#/
 server : http://3.35.131.149/api-docs/#/
 // 마트다운 형식
 
-![modeling](/public/image/modeling.PNG)
 
-![swagger](./public/image/swagger.PNG)
+![swagger](https://github.com/smilejakdu/bear_and_peach/blob/main/back/public/images/modeling.png)
 
 # DB modeling 
+
+![modeling](https://github.com/smilejakdu/bear_and_peach/blob/main/back/public/images/modeling.png)
 
 
 # Technologies
