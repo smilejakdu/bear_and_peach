@@ -9,7 +9,7 @@ module.exports = {
       },
       exec_mode: "cluster",
       env_production: {
-        NODE_ENV: "production", // 배포환경시 적용될 설정 지정
+        NODE_ENV: "production.js", // 배포환경시 적용될 설정 지정
       },
     },
   ],
