@@ -1,6 +1,6 @@
 "use strict";
 
-if (["production", "development", "local"].indexOf(process.env.NODE_ENV) === -1) {
+if (["production.js", "development.js", "local.js"].indexOf(process.env.NODE_ENV) === -1) {
   process.env.NODE_ENV = "local";
 }
 const envs = require(`./${process.env.NODE_ENV}`);
