@@ -3,7 +3,7 @@
 카카오 프렌즈를 보며 클론한 프로젝트 입니다.
 https://store.kakaofriends.com/kr/index
 
-- 기간 : 21.04.01 ~ ( ing )
+- 기간 : 21.04.12 ~ ( ing )
 - 구성 : 1명
 
 # Demo Swagger
