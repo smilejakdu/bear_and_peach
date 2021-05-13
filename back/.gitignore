@@ -38,6 +38,9 @@ bower_components
 build/Release
 
 # Dependency directories
+AWSCLIV2.pkg
+nginx/
+Dockerfile
 node_modules/
 jspm_packages/
 config/
