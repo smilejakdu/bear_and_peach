@@ -4,7 +4,7 @@ services:
     image: 955251329813.dkr.ecr.ap-northeast-2.amazonaws.com/bear_and_peach:latest
     restart: always
     environment:
-      - VIRTUAL_HOST=ec2-54-180-92-8.ap-northeast-2.compute.amazonaws.com
+      - VIRTUAL_HOST=ec2-3-35-131-149.ap-northeast-2.compute.amazonaws.com
       - VIRTUAL_PORT=4000
       - NODE_ENV=production
     networks:
