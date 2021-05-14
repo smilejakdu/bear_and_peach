@@ -6,8 +6,6 @@ services:
     environment:
       - VIRTUAL_HOST=ec2-54-180-92-8.ap-northeast-2.compute.amazonaws.com
       - VIRTUAL_PORT=4000
-      # - LETSENCRYPT_HOST=ec2-54-180-92-8.ap-northeast-2.compute.amazonaws.com
-      # - LETSENCRYPT_EMAIL=developer@team-everywhere.com
       - NODE_ENV=production
     networks:
       - nginx-proxy
