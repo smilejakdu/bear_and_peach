@@ -38,6 +38,7 @@ bower_components
 build/Release
 
 # Dependency directories
+scripts
 AWSCLIV2.pkg
 nginx/
 Dockerfile

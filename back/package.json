@@ -28,7 +28,8 @@
     "start": "node ./server/bin/www",
     "dev": "nodemon ./server/bin/www",
     "prod": "NODE_ENV=production nodemon ./server/bin/www",
-    "pm": "pm2 start ./bin.www"
+    "pm": "pm2 start ./bin.www",
+    "deploy": "sh ./scripts/deploy-dev.sh"
   },
   "author": "jakdu",
   "license": "ISC",
