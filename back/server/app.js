@@ -32,8 +32,8 @@ const swaggerDefinition = {
     version: "1.0.0",
     description: "API description",
   },
-  host: "3.35.131.149",
-//   host: "localhost:4000",
+  // host: "3.35.131.149",
+  host : process.env.PORT || 'localhost:4000',
   basePath: "/",
   securityDefinitions: {
     bearerAuth: {
