@@ -41,7 +41,6 @@ build/Release
 scripts/copy.sh
 AWSCLIV2.pkg
 nginx/
-Dockerfile
 node_modules/
 jspm_packages/
 config/
