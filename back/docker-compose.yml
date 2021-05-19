@@ -1,5 +1,4 @@
-version: '3.6'
-services:
+version: '3.6' services:
   server:
     image: 955251329813.dkr.ecr.ap-northeast-2.amazonaws.com/bear_and_peach:latest
     restart: always
