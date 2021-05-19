@@ -11,7 +11,7 @@ https://store.kakaofriends.com/kr/index
 localst : http://localhost:4000/api-docs/#/
 
 server : http://3.35.131.149/api-docs/#/
-
+`Docker 붙이는 중입니다.`
 
 ![swagger](https://github.com/smilejakdu/bear_and_peach/blob/main/back/server/public/images/swagger.png)
 
