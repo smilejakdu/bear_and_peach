@@ -38,8 +38,7 @@ bower_components
 build/Release
 
 # Dependency directories
-scripts/copy.sh
-scripts/deploy-dev.sh
+scripts/
 AWSCLIV2.pkg
 nginx/
 node_modules/
