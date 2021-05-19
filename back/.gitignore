@@ -39,6 +39,7 @@ build/Release
 
 # Dependency directories
 scripts/copy.sh
+scripts/deploy-dev.sh
 AWSCLIV2.pkg
 nginx/
 node_modules/
