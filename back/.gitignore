@@ -43,7 +43,12 @@ AWSCLIV2.pkg
 nginx/
 node_modules/
 jspm_packages/
-config/
+# config/ # config 폴더 전체 gitignore
+server/config/development.js
+server/config/local.js
+server/config/production.js
+server/config/secret_key.js
+
 
 # Snowpack dependency directory (https://snowpack.dev/)
 web_modules/
