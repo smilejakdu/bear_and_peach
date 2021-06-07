@@ -27,7 +27,9 @@ function* addComment(action){
             error:error.response.data,
         })
     }
-}
+export const LOAD_BOARD_REQUEST = "LOAD_BOARD_REQUEST";
+export const LOAD_BOARD_SUCCESS = "LOAD_BOARD_SUCCESS";
+export const LOAD_BOARD_FAILURE = "LOAD_BOARD_FAILURE";}
 
 function* watchAddComment(){
     yield takeLatest(ADD_COMMENT_REQUEST , addComment);

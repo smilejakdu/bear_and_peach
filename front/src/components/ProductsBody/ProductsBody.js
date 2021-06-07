@@ -13,6 +13,7 @@ const ProductsBody=()=> {
       type : LOAD_PRODUCTS_REQUEST,
     });
   },[]);
+
   useEffect(() =>{
     console.log(mainProducts);
   })

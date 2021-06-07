@@ -29,7 +29,6 @@ function* watchLoadProducts (){
 }
 
 export default function* productSaga(){
-    console.log(3);
     yield all([
         fork(watchLoadProducts),
     ]);

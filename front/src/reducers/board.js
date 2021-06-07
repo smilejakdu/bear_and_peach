@@ -26,6 +26,7 @@ export const initialState = {
   uploadImagesLoading: false,
   uploadImagesDone: false,
   uploadImagesError: null,
+
   retweetLoading: false,
   retweetDone: false,
   retweetError: null,
