@@ -32,7 +32,7 @@ const swaggerDefinition = {
     version: "1.0.0",
     description: "API description",
   },
-  host: "3.35.131.149",
+  host: "15.165.23.12",
   // host : process.env.PORT || 'localhost:4000',
   basePath: "/",
   securityDefinitions: {
